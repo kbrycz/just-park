@@ -3,11 +3,15 @@
 import Foundation
 import MapKit
 
+class RoadPolyline: MKPolyline {
+    var roadID: Int?
+}
+
 struct Road: Identifiable {
     let id: Int
     let name: String
     let cleaningDates: [Date]
-    let polyline: MKPolyline
+    let polyline: RoadPolyline
 
     func nextCleaningDate() -> Date? {
         let today = Date()
@@ -29,17 +33,5 @@ struct Road: Identifiable {
         } else {
             return "clear"
         }
-    }
-}
-
-// Extension to calculate midpoint of coordinates array
-extension Array where Element == CLLocationCoordinate2D {
-    var midpoint: CLLocationCoordinate2D? {
-        guard !self.isEmpty else { return nil }
-        let total = self.reduce((latitude: 0.0, longitude: 0.0)) { (result, coord) -> (latitude: Double, longitude: Double) in
-            (latitude: result.latitude + coord.latitude, longitude: result.longitude + coord.longitude)
-        }
-        let count = Double(self.count)
-        return CLLocationCoordinate2D(latitude: total.latitude / count, longitude: total.longitude / count)
     }
 }

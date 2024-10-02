@@ -1,51 +1,52 @@
-// MapView.swift
-
 import SwiftUI
 import MapKit
+import ObjectiveC.runtime
 
 struct MapView: UIViewRepresentable {
     @EnvironmentObject var locationManager: LocationManager
     @Binding var overlays: [MKOverlay]
+    @Binding var annotations: [MKAnnotation]
     var roads: [Road]
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = false
-        mapView.setRegion(locationManager.region, animated: true)
+        mapView.setRegion(locationManager.region, animated: true) // Set region here
 
         return mapView
     }
 
     func updateUIView(_ mapView: MKMapView, context: Context) {
-        mapView.setRegion(locationManager.region, animated: true)
+        // Do not reset the region here
 
-        // Remove existing overlays
+        // Remove existing overlays and annotations
         mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
 
-        // Add new overlays
+        // Add new overlays and annotations
         mapView.addOverlays(overlays)
+        mapView.addAnnotations(annotations)
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(self, roads: roads)
+        Coordinator(self)
     }
 
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: MapView
-        var roads: [Road]
 
-        init(_ parent: MapView, roads: [Road]) {
+        init(_ parent: MapView) {
             self.parent = parent
-            self.roads = roads
         }
 
-        // Use the custom renderer
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let polyline = overlay as? MKPolyline {
-                let renderer = SelectablePolylineRenderer(polyline: polyline)
+                let renderer = MKPolylineRenderer(polyline: polyline)
 
-                if let road = roads.first(where: { $0.polyline === polyline }) {
+                // Retrieve the associated Road object
+                if let road = objc_getAssociatedObject(polyline, &roadAssociatedKey) as? Road {
+                    print("Found road: \(road.name) with status: \(road.status())")
                     let status = road.status()
 
                     switch status {
@@ -59,35 +60,49 @@ struct MapView: UIViewRepresentable {
                         renderer.strokeColor = UIColor.gray.withAlphaComponent(0.7)
                     }
                 } else {
+                    print("No associated road found for polyline")
                     renderer.strokeColor = UIColor.gray.withAlphaComponent(0.7)
                 }
 
                 renderer.lineWidth = 4
-                renderer.isOpaque = false
                 return renderer
             }
             return MKOverlayRenderer()
         }
 
-        // Handle tap on overlay
-        func mapView(_ mapView: MKMapView, didSelect overlay: MKOverlay) {
-            if let polyline = overlay as? MKPolyline,
-               let road = roads.first(where: { $0.polyline === polyline }) {
+
+        // Handle annotation views
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            guard annotation is RoadAnnotation else { return nil }
+
+            let identifier = "RoadAnnotation"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = false
+            } else {
+                annotationView?.annotation = annotation
+            }
+
+            // Make the annotation view invisible but with a larger touch area
+            annotationView?.isEnabled = true
+            annotationView?.alpha = 0.001
+            annotationView?.frame.size = CGSize(width: 44, height: 44) // Increase touch area
+            annotationView?.centerOffset = CGPoint(x: 0, y: 0)
+
+            return annotationView
+        }
+
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            if let roadAnnotation = view.annotation as? RoadAnnotation,
+               let road = roadAnnotation.road {
                 DispatchQueue.main.async {
                     self.parent.locationManager.selectedRoad = road
                 }
             }
-            // Deselect overlay to allow re-selection
-            mapView.deselectOverlay(overlay)
-        }
-
-        // Enable selection on overlays
-        func mapView(_ mapView: MKMapView, didAdd renderers: [MKOverlayRenderer]) {
-            for renderer in renderers {
-                if let polylineRenderer = renderer as? SelectablePolylineRenderer {
-                    polylineRenderer.alpha = polylineRenderer.strokeColor.cgColor.alpha
-                }
-            }
+            // Deselect the annotation to allow re-selection
+            mapView.deselectAnnotation(view.annotation, animated: false)
         }
     }
 }
