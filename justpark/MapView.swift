@@ -1,12 +1,12 @@
+// MapView.swift
+
 import SwiftUI
 import MapKit
-import ObjectiveC.runtime
 
 struct MapView: UIViewRepresentable {
     @EnvironmentObject var locationManager: LocationManager
     @Binding var overlays: [MKOverlay]
     @Binding var annotations: [MKAnnotation]
-    var roads: [Road]
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
@@ -41,11 +41,10 @@ struct MapView: UIViewRepresentable {
         }
 
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            if let polyline = overlay as? MKPolyline {
-                let renderer = MKPolylineRenderer(polyline: polyline)
+            if let roadOverlay = overlay as? RoadOverlay {
+                let renderer = MKPolylineRenderer(polyline: roadOverlay)
 
-                // Retrieve the associated Road object
-                if let road = objc_getAssociatedObject(polyline, &roadAssociatedKey) as? Road {
+                if let road = roadOverlay.road {
                     print("Found road: \(road.name) with status: \(road.status())")
                     let status = road.status()
 
@@ -60,7 +59,7 @@ struct MapView: UIViewRepresentable {
                         renderer.strokeColor = UIColor.gray.withAlphaComponent(0.7)
                     }
                 } else {
-                    print("No associated road found for polyline")
+                    print("No associated road found for overlay")
                     renderer.strokeColor = UIColor.gray.withAlphaComponent(0.7)
                 }
 
@@ -69,7 +68,6 @@ struct MapView: UIViewRepresentable {
             }
             return MKOverlayRenderer()
         }
-
 
         // Handle annotation views
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

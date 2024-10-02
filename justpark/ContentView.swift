@@ -2,20 +2,19 @@
 
 import SwiftUI
 import MapKit
-import ObjectiveC.runtime
 
 struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
     @State private var overlays: [MKOverlay] = []
-    @State private var roads: [Road] = []
     @State private var annotations: [MKAnnotation] = []
     @State private var showingAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
+    @State private var roads: [Road] = []
 
     var body: some View {
         ZStack {
-            MapView(overlays: $overlays, annotations: $annotations, roads: roads)
+            MapView(overlays: $overlays, annotations: $annotations)
                 .environmentObject(locationManager)
                 .edgesIgnoringSafeArea(.all)
             ZoomControls()
@@ -49,59 +48,59 @@ struct ContentView: View {
     }
 
     func loadGeoJSONData() {
-            if let url = Bundle.main.url(forResource: "LakeViewStreets", withExtension: "geojson") {
-                do {
-                    let data = try Data(contentsOf: url)
-                    let decoder = MKGeoJSONDecoder()
-                    let features = try decoder.decode(data) as? [MKGeoJSONFeature]
+        if let url = Bundle.main.url(forResource: "LakeViewStreets", withExtension: "geojson") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = MKGeoJSONDecoder()
+                let features = try decoder.decode(data) as? [MKGeoJSONFeature]
 
-                    var loadedRoads: [Road] = []
-                    var loadedAnnotations: [MKAnnotation] = []
+                var loadedRoads: [Road] = []
+                var loadedAnnotations: [MKAnnotation] = []
 
-                    for feature in features ?? [] {
-                        if let lineString = feature.geometry.first as? MKPolyline,
-                           let propertiesData = feature.properties,
-                           let properties = try JSONSerialization.jsonObject(with: propertiesData) as? [String: Any],
-                           let id = properties["id"] as? Int,
-                           let name = properties["name"] as? String,
-                           let cleaningDatesStrings = properties["cleaning_dates"] as? [String] {
+                for feature in features ?? [] {
+                    if let lineString = feature.geometry.first as? MKPolyline,
+                       let propertiesData = feature.properties,
+                       let properties = try JSONSerialization.jsonObject(with: propertiesData) as? [String: Any],
+                       let id = properties["id"] as? Int,
+                       let name = properties["name"] as? String,
+                       let cleaningDatesStrings = properties["cleaning_dates"] as? [String] {
 
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd"
-                            let cleaningDates = cleaningDatesStrings.compactMap { dateFormatter.date(from: $0) }
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        let cleaningDates = cleaningDatesStrings.compactMap { dateFormatter.date(from: $0) }
 
-                            // Create RoadPolyline
-                            let pointCount = lineString.pointCount
-                            var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: pointCount)
-                            lineString.getCoordinates(&coordinates, range: NSRange(location: 0, length: pointCount))
+                        let road = Road(id: id, name: name, cleaningDates: cleaningDates)
+                        loadedRoads.append(road)
 
-                            let polyline = RoadPolyline(coordinates: coordinates, count: pointCount)
-                            polyline.roadID = id
+                        // Create RoadOverlay
+                        let pointCount = lineString.pointCount
+                        var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: pointCount)
+                        lineString.getCoordinates(&coordinates, range: NSRange(location: 0, length: pointCount))
 
-                            let road = Road(id: id, name: name, cleaningDates: cleaningDates, polyline: polyline)
-                            loadedRoads.append(road)
+                        let polyline = RoadOverlay(coordinates: coordinates, count: pointCount)
+                        polyline.road = road
 
-                            overlays.append(polyline)
+                        overlays.append(polyline)
 
-                            // Place annotations along the polyline
-                            for (index, coordinate) in coordinates.enumerated() {
-                                if index % 2 == 0 {
-                                    let annotation = RoadAnnotation(coordinate: coordinate)
-                                    annotation.road = road
-                                    loadedAnnotations.append(annotation)
-                                }
+                        // Place annotations along the polyline
+                        for (index, coordinate) in coordinates.enumerated() {
+                            if index % 2 == 0 {
+                                let annotation = RoadAnnotation(coordinate: coordinate)
+                                annotation.road = road
+                                loadedAnnotations.append(annotation)
                             }
                         }
                     }
-
-                    roads = loadedRoads
-                    annotations = loadedAnnotations
-
-                } catch {
-                    print("Error loading GeoJSON data: \(error)")
                 }
-            } else {
-                print("Could not find LakeViewStreets.geojson")
+
+                roads = loadedRoads
+                annotations = loadedAnnotations
+
+            } catch {
+                print("Error loading GeoJSON data: \(error)")
             }
+        } else {
+            print("Could not find LakeViewStreets.geojson")
         }
+    }
 }

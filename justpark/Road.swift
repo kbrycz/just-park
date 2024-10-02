@@ -3,16 +3,17 @@
 import Foundation
 import MapKit
 
-class RoadPolyline: MKPolyline {
-    var roadID: Int?
-}
-
 struct Road: Identifiable {
     let id: Int
     let name: String
     let cleaningDates: [Date]
-    let polyline: RoadPolyline
+}
 
+class RoadOverlay: MKPolyline {
+    var road: Road?
+}
+
+extension Road {
     func nextCleaningDate() -> Date? {
         let today = Date()
         let futureDates = cleaningDates.filter { $0 >= today }

@@ -20,7 +20,6 @@
 		F6BE2B962CACF56500FF863D /* LakeViewStreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */; };
 		F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */; };
 		F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */; };
-		F6BE2BA02CAD03E100FF863D /* RoadAssociationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B9F2CAD03E100FF863D /* RoadAssociationKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +37,6 @@
 		F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = LakeViewStreets.geojson; sourceTree = "<group>"; };
 		F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadAnnotation.swift; sourceTree = "<group>"; };
 		F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extensions.swift"; sourceTree = "<group>"; };
-		F6BE2B9F2CAD03E100FF863D /* RoadAssociationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadAssociationKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +82,6 @@
 				F6BE2B7E2CACE7C500FF863D /* Preview Content */,
 				F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */,
 				F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */,
-				F6BE2B9F2CAD03E100FF863D /* RoadAssociationKey.swift */,
 			);
 			path = justpark;
 			sourceTree = "<group>";
@@ -175,7 +172,6 @@
 				F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */,
 				F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
-				F6BE2BA02CAD03E100FF863D /* RoadAssociationKey.swift in Sources */,
 				F6BE2B872CACE89B00FF863D /* LocationManager.swift in Sources */,
 				F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */,
 				F6BE2B8B2CACEAD200FF863D /* ZoomControls.swift in Sources */,
