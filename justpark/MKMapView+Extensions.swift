@@ -1,8 +1,11 @@
-//
-//  MKMapView+Extensions.swift
-//  justpark
-//
-//  Created by Karl Brycz on 10/1/24.
-//
+// MKMapView+Extensions.swift
 
-import Foundation
+import MapKit
+
+extension MKMapView {
+    func deselectOverlay(_ overlay: MKOverlay) {
+        if let renderer = self.renderer(for: overlay) as? MKOverlayPathRenderer {
+            renderer.setNeedsDisplay()
+        }
+    }
+}

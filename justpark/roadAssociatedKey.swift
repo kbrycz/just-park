@@ -1,8 +1,5 @@
-//
-//  roadAssociatedKey.swift
-//  justpark
-//
-//  Created by Karl Brycz on 10/1/24.
-//
+// RoadAssociationKey.swift
 
 import Foundation
+
+var roadAssociatedKey: UInt8 = 0

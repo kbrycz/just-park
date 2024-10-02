@@ -1,8 +1,13 @@
-//
-//  RoadAnnotation.swift
-//  justpark
-//
-//  Created by Karl Brycz on 10/1/24.
-//
+// RoadAnnotation.swift
 
 import Foundation
+import MapKit
+
+class RoadAnnotation: NSObject, MKAnnotation {
+    dynamic var coordinate: CLLocationCoordinate2D
+    var road: Road?
+
+    init(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+    }
+}
