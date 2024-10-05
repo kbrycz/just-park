@@ -7,13 +7,13 @@ struct MapView: UIViewRepresentable {
     @EnvironmentObject var locationManager: LocationManager
     @Binding var overlays: [MKOverlay]
     @Binding var annotations: [MKAnnotation]
-    
+
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = false
         mapView.setRegion(locationManager.region, animated: true)
-        
+
         // Exclude all points of interest
         mapView.pointOfInterestFilter = MKPointOfInterestFilter.excludingAll
 
@@ -21,7 +21,10 @@ struct MapView: UIViewRepresentable {
     }
 
     func updateUIView(_ mapView: MKMapView, context: Context) {
-        // Do not reset the region here
+        // Update the region only if it has changed
+        if !mapView.region.isEqual(to: locationManager.region) {
+            mapView.setRegion(locationManager.region, animated: true)
+        }
 
         // Remove existing overlays and annotations
         mapView.removeOverlays(mapView.overlays)

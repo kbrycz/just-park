@@ -11,7 +11,7 @@ struct ContentView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var roads: [Road] = []
-    
+
     var body: some View {
         ZStack {
             MapView(overlays: $overlays, annotations: $annotations)

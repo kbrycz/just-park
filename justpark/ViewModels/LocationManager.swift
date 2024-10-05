@@ -1,3 +1,5 @@
+// ViewModels/LocationManager.swift
+
 import Foundation
 import MapKit
 

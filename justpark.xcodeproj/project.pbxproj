@@ -20,6 +20,7 @@
 		F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */; };
 		F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */; };
 		F6BE2BAA2CB1C62A00FF863D /* MapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */; };
+		F6BE2BAC2CB1C76000FF863D /* MKCoordinateRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BAB2CB1C76000FF863D /* MKCoordinateRegion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extensions.swift"; sourceTree = "<group>"; };
 		F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonLoader.swift; sourceTree = "<group>"; };
 		F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCoordinator.swift; sourceTree = "<group>"; };
+		F6BE2BAB2CB1C76000FF863D /* MKCoordinateRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */,
+				F6BE2BAB2CB1C76000FF863D /* MKCoordinateRegion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				F6BE2B872CACE89B00FF863D /* LocationManager.swift in Sources */,
 				F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */,
 				F6BE2B8B2CACEAD200FF863D /* ZoomControls.swift in Sources */,
+				F6BE2BAC2CB1C76000FF863D /* MKCoordinateRegion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
