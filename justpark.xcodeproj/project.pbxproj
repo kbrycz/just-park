@@ -15,11 +15,11 @@
 		F6BE2B892CACEAB000FF863D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B882CACEAB000FF863D /* MapView.swift */; };
 		F6BE2B8B2CACEAD200FF863D /* ZoomControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */; };
 		F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B8E2CACEF1300FF863D /* Road.swift */; };
-		F6BE2B912CACEF6000FF863D /* MKPolyline+Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B902CACEF6000FF863D /* MKPolyline+Coordinates.swift */; };
-		F6BE2B942CACF49B00FF863D /* GeoJsonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B932CACF49B00FF863D /* GeoJsonLoader.swift */; };
 		F6BE2B962CACF56500FF863D /* LakeViewStreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */; };
 		F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */; };
 		F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */; };
+		F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */; };
+		F6BE2BAA2CB1C62A00FF863D /* MapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,11 +32,11 @@
 		F6BE2B882CACEAB000FF863D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomControls.swift; sourceTree = "<group>"; };
 		F6BE2B8E2CACEF1300FF863D /* Road.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Road.swift; sourceTree = "<group>"; };
-		F6BE2B902CACEF6000FF863D /* MKPolyline+Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPolyline+Coordinates.swift"; sourceTree = "<group>"; };
-		F6BE2B932CACF49B00FF863D /* GeoJsonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonLoader.swift; sourceTree = "<group>"; };
 		F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = LakeViewStreets.geojson; sourceTree = "<group>"; };
 		F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadAnnotation.swift; sourceTree = "<group>"; };
 		F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extensions.swift"; sourceTree = "<group>"; };
+		F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonLoader.swift; sourceTree = "<group>"; };
+		F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,19 +69,15 @@
 		F6BE2B772CACE7C400FF863D /* justpark */ = {
 			isa = PBXGroup;
 			children = (
-				F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */,
-				F6BE2B932CACF49B00FF863D /* GeoJsonLoader.swift */,
-				F6BE2B902CACEF6000FF863D /* MKPolyline+Coordinates.swift */,
-				F6BE2B8E2CACEF1300FF863D /* Road.swift */,
-				F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */,
-				F6BE2B882CACEAB000FF863D /* MapView.swift */,
-				F6BE2B862CACE89B00FF863D /* LocationManager.swift */,
+				F6BE2BA62CB1C2CD00FF863D /* Resources */,
+				F6BE2BA52CB1C2C700FF863D /* Utilities */,
+				F6BE2BA42CB1C2BF00FF863D /* Extensions */,
+				F6BE2BA32CB1C2B700FF863D /* ViewModels */,
+				F6BE2BA22CB1C2AA00FF863D /* Views */,
+				F6BE2BA12CB1C2A200FF863D /* Models */,
 				F6BE2B782CACE7C400FF863D /* justparkApp.swift */,
-				F6BE2B7A2CACE7C400FF863D /* ContentView.swift */,
 				F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */,
 				F6BE2B7E2CACE7C500FF863D /* Preview Content */,
-				F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */,
-				F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */,
 			);
 			path = justpark;
 			sourceTree = "<group>";
@@ -92,6 +88,58 @@
 				F6BE2B7F2CACE7C500FF863D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F6BE2BA12CB1C2A200FF863D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F6BE2B8E2CACEF1300FF863D /* Road.swift */,
+				F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F6BE2BA22CB1C2AA00FF863D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F6BE2B7A2CACE7C400FF863D /* ContentView.swift */,
+				F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */,
+				F6BE2B882CACEAB000FF863D /* MapView.swift */,
+				F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F6BE2BA32CB1C2B700FF863D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F6BE2B862CACE89B00FF863D /* LocationManager.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F6BE2BA42CB1C2BF00FF863D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F6BE2BA52CB1C2C700FF863D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F6BE2BA62CB1C2CD00FF863D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,10 +214,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6BE2B7B2CACE7C400FF863D /* ContentView.swift in Sources */,
-				F6BE2B912CACEF6000FF863D /* MKPolyline+Coordinates.swift in Sources */,
-				F6BE2B942CACF49B00FF863D /* GeoJsonLoader.swift in Sources */,
 				F6BE2B892CACEAB000FF863D /* MapView.swift in Sources */,
 				F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */,
+				F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */,
+				F6BE2BAA2CB1C62A00FF863D /* MapViewCoordinator.swift in Sources */,
 				F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
 				F6BE2B872CACE89B00FF863D /* LocationManager.swift in Sources */,
