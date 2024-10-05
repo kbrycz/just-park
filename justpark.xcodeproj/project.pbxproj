@@ -21,6 +21,12 @@
 		F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */; };
 		F6BE2BAA2CB1C62A00FF863D /* MapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */; };
 		F6BE2BAC2CB1C76000FF863D /* MKCoordinateRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BAB2CB1C76000FF863D /* MKCoordinateRegion.swift */; };
+		F6BE2BAE2CB1CD2700FF863D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BAD2CB1CD2700FF863D /* logo.png */; };
+		F6BE2BB22CB1CDB300FF863D /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BAF2CB1CDB300FF863D /* Quicksand-Regular.ttf */; };
+		F6BE2BB32CB1CDB300FF863D /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BB02CB1CDB300FF863D /* Quicksand-Medium.ttf */; };
+		F6BE2BB42CB1CDB300FF863D /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BB12CB1CDB300FF863D /* Quicksand-Bold.ttf */; };
+		F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BB62CB1CE9500FF863D /* Color.swift */; };
+		F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BB82CB1D01900FF863D /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +45,13 @@
 		F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonLoader.swift; sourceTree = "<group>"; };
 		F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCoordinator.swift; sourceTree = "<group>"; };
 		F6BE2BAB2CB1C76000FF863D /* MKCoordinateRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegion.swift; sourceTree = "<group>"; };
+		F6BE2BAD2CB1CD2700FF863D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		F6BE2BAF2CB1CDB300FF863D /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
+		F6BE2BB02CB1CDB300FF863D /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
+		F6BE2BB12CB1CDB300FF863D /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.ttf"; sourceTree = "<group>"; };
+		F6BE2BB62CB1CE9500FF863D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		F6BE2BB82CB1D01900FF863D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F6BE2BBA2CB1D0B700FF863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +84,8 @@
 		F6BE2B772CACE7C400FF863D /* justpark */ = {
 			isa = PBXGroup;
 			children = (
+				F6BE2BBA2CB1D0B700FF863D /* Info.plist */,
+				F6BE2BB52CB1CE8E00FF863D /* Design */,
 				F6BE2BA62CB1C2CD00FF863D /* Resources */,
 				F6BE2BA52CB1C2C700FF863D /* Utilities */,
 				F6BE2BA42CB1C2BF00FF863D /* Extensions */,
@@ -79,6 +94,10 @@
 				F6BE2BA12CB1C2A200FF863D /* Models */,
 				F6BE2B782CACE7C400FF863D /* justparkApp.swift */,
 				F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */,
+				F6BE2BB12CB1CDB300FF863D /* Quicksand-Bold.ttf */,
+				F6BE2BB02CB1CDB300FF863D /* Quicksand-Medium.ttf */,
+				F6BE2BAF2CB1CDB300FF863D /* Quicksand-Regular.ttf */,
+				F6BE2BAD2CB1CD2700FF863D /* logo.png */,
 				F6BE2B7E2CACE7C500FF863D /* Preview Content */,
 			);
 			path = justpark;
@@ -108,6 +127,7 @@
 				F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */,
 				F6BE2B882CACEAB000FF863D /* MapView.swift */,
 				F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */,
+				F6BE2BB82CB1D01900FF863D /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -143,6 +163,14 @@
 				F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		F6BE2BB52CB1CE8E00FF863D /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				F6BE2BB62CB1CE9500FF863D /* Color.swift */,
+			);
+			path = Design;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,9 +231,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6BE2BB42CB1CDB300FF863D /* Quicksand-Bold.ttf in Resources */,
+				F6BE2BAE2CB1CD2700FF863D /* logo.png in Resources */,
 				F6BE2B962CACF56500FF863D /* LakeViewStreets.geojson in Resources */,
 				F6BE2B802CACE7C500FF863D /* Preview Assets.xcassets in Resources */,
 				F6BE2B7D2CACE7C500FF863D /* Assets.xcassets in Resources */,
+				F6BE2BB22CB1CDB300FF863D /* Quicksand-Regular.ttf in Resources */,
+				F6BE2BB32CB1CDB300FF863D /* Quicksand-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,9 +250,11 @@
 			files = (
 				F6BE2B7B2CACE7C400FF863D /* ContentView.swift in Sources */,
 				F6BE2B892CACEAB000FF863D /* MapView.swift in Sources */,
+				F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */,
 				F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */,
 				F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */,
 				F6BE2BAA2CB1C62A00FF863D /* MapViewCoordinator.swift in Sources */,
+				F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */,
 				F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
 				F6BE2B872CACE89B00FF863D /* LocationManager.swift in Sources */,
@@ -363,6 +397,7 @@
 				DEVELOPMENT_TEAM = TW65Z2CGW7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = justpark/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show where you are on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -393,6 +428,7 @@
 				DEVELOPMENT_TEAM = TW65Z2CGW7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = justpark/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show where you are on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

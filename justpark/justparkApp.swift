@@ -1,9 +1,4 @@
-//
-//  justparkApp.swift
-//  justpark
-//
-//  Created by Karl Brycz on 10/1/24.
-//
+// justparkApp.swift
 
 import SwiftUI
 
@@ -11,7 +6,7 @@ import SwiftUI
 struct justparkApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }

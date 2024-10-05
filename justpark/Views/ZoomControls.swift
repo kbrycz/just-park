@@ -12,7 +12,7 @@ struct ZoomControls: View {
             }) {
                 Image(systemName: "plus.magnifyingglass")
                     .padding()
-                    .background(Color.white.opacity(0.8))
+                    .background(Color.customBackground.opacity(0.7))
                     .clipShape(Circle())
             }
 
@@ -21,7 +21,7 @@ struct ZoomControls: View {
             }) {
                 Image(systemName: "minus.magnifyingglass")
                     .padding()
-                    .background(Color.white.opacity(0.8))
+                    .background(Color.customBackground.opacity(0.7))
                     .clipShape(Circle())
             }
         }

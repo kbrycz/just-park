@@ -11,7 +11,7 @@ struct ContentView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var roads: [Road] = []
-
+    
     var body: some View {
         ZStack {
             MapView(overlays: $overlays, annotations: $annotations)
@@ -23,6 +23,16 @@ struct ContentView: View {
                 .padding(.trailing, 20)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
         }
+        .navigationBarTitle("Street Cleaning", displayMode: .inline)
+        .navigationBarItems(trailing:
+            Button(action: {
+                // Future implementation for Info button
+            }) {
+                Image(systemName: "info.circle")
+                    .imageScale(.large)
+                    .foregroundColor(Color.customText)
+            }
+        )
         .onAppear {
             let result = GeoJSONLoader.loadGeoJSONData(fileName: "LakeViewStreets")
             overlays = result.overlays
