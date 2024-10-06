@@ -27,6 +27,7 @@
 		F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BB62CB1CE9500FF863D /* Color.swift */; };
 		F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BB82CB1D01900FF863D /* HomeView.swift */; };
 		F6BE2BBC2CB22A2900FF863D /* 44_diversey_belmont_final.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BBB2CB22A2900FF863D /* 44_diversey_belmont_final.geojson */; };
+		F6BE2BC72CB3109D00FF863D /* RoadInfoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BC62CB3109D00FF863D /* RoadInfoModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		F6BE2BB82CB1D01900FF863D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F6BE2BBA2CB1D0B700FF863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F6BE2BBB2CB22A2900FF863D /* 44_diversey_belmont_final.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 44_diversey_belmont_final.geojson; sourceTree = "<group>"; };
+		F6BE2BC62CB3109D00FF863D /* RoadInfoModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadInfoModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */,
 				F6BE2B882CACEAB000FF863D /* MapView.swift */,
 				F6BE2BB82CB1D01900FF863D /* HomeView.swift */,
+				F6BE2BC62CB3109D00FF863D /* RoadInfoModalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */,
 				F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */,
 				F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */,
+				F6BE2BC72CB3109D00FF863D /* RoadInfoModalView.swift in Sources */,
 				F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */,
 				F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
