@@ -25,9 +25,9 @@ struct MapView: UIViewRepresentable {
     }
 
     func updateUIView(_ mapView: MKMapView, context: Context) {
-        // Update the region only if it has changed
-        if !mapView.region.isEqual(to: locationManager.region) {
-            mapView.setRegion(locationManager.region, animated: true)
+        // Update the region only if it has changed significantly
+        if !mapView.region.isApproximatelyEqual(to: locationManager.region) {
+            mapView.setRegion(locationManager.region, animated: false)
         }
 
         // Remove existing overlays and annotations
@@ -63,8 +63,8 @@ struct MapView: UIViewRepresentable {
                         renderer.strokeColor = UIColor.red.withAlphaComponent(0.7)
                     case "yellow":
                         renderer.strokeColor = UIColor.yellow.withAlphaComponent(0.7)
-                    case "clear":
-                        renderer.strokeColor = UIColor.green.withAlphaComponent(0.1) // Very transparent
+                    case "green":
+                        renderer.strokeColor = UIColor.green.withAlphaComponent(0.7)
                     default:
                         renderer.strokeColor = UIColor.gray.withAlphaComponent(0.7)
                     }
@@ -111,5 +111,22 @@ struct MapView: UIViewRepresentable {
             // Deselect the annotation to allow re-selection
             mapView.deselectAnnotation(view.annotation, animated: false)
         }
+
+        func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+            // Update the LocationManager's region to match the map view's region
+            parent.locationManager.region = mapView.region
+        }
+    }
+}
+
+// Add this extension to compare regions approximately
+extension MKCoordinateRegion {
+    func isApproximatelyEqual(to region: MKCoordinateRegion) -> Bool {
+        let epsilon = 0.0001
+        let centerEqual = abs(self.center.latitude - region.center.latitude) < epsilon &&
+                          abs(self.center.longitude - region.center.longitude) < epsilon
+        let spanEqual = abs(self.span.latitudeDelta - region.span.latitudeDelta) < epsilon &&
+                        abs(self.span.longitudeDelta - region.span.longitudeDelta) < epsilon
+        return centerEqual && spanEqual
     }
 }

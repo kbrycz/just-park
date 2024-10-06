@@ -21,6 +21,8 @@ extension Road {
     }
 
     func status() -> String {
+        // Commented out the date-based logic
+        /*
         guard let nextDate = nextCleaningDate() else {
             return "clear"
         }
@@ -34,5 +36,10 @@ extension Road {
         } else {
             return "clear"
         }
+        */
+
+        // Temporary random status for debugging
+        let statuses = ["red", "yellow", "green"]
+        return statuses.randomElement() ?? "green"
     }
 }
