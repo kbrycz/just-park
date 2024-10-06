@@ -7,6 +7,7 @@ struct Road: Identifiable {
     let id: Int
     let name: String
     let cleaningDates: [Date]
+    let status: String // Add this line to include the status property
 }
 
 class RoadOverlay: MKPolyline {
@@ -20,26 +21,8 @@ extension Road {
         return futureDates.sorted().first
     }
 
-    func status() -> String {
-        // Commented out the date-based logic
-        /*
-        guard let nextDate = nextCleaningDate() else {
-            return "clear"
-        }
-        let calendar = Calendar.current
-        let daysUntilCleaning = calendar.dateComponents([.day], from: Date(), to: nextDate).day ?? Int.max
-
-        if daysUntilCleaning <= 2 {
-            return "red"
-        } else if daysUntilCleaning <= 7 {
-            return "yellow"
-        } else {
-            return "clear"
-        }
-        */
-
-        // Temporary random status for debugging
-        let statuses = ["red", "yellow", "green"]
-        return statuses.randomElement() ?? "green"
+    func getStatus() -> String {
+        // Since status is now a property, simply return it
+        return status
     }
 }
