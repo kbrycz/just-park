@@ -19,7 +19,6 @@
 		F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */; };
 		F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */; };
 		F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */; };
-		F6BE2BAA2CB1C62A00FF863D /* MapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */; };
 		F6BE2BAC2CB1C76000FF863D /* MKCoordinateRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BAB2CB1C76000FF863D /* MKCoordinateRegion.swift */; };
 		F6BE2BAE2CB1CD2700FF863D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BAD2CB1CD2700FF863D /* logo.png */; };
 		F6BE2BB22CB1CDB300FF863D /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BAF2CB1CDB300FF863D /* Quicksand-Regular.ttf */; };
@@ -28,8 +27,6 @@
 		F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BB62CB1CE9500FF863D /* Color.swift */; };
 		F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BB82CB1D01900FF863D /* HomeView.swift */; };
 		F6BE2BBC2CB22A2900FF863D /* 44_diversey_belmont_final.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BBB2CB22A2900FF863D /* 44_diversey_belmont_final.geojson */; };
-		F6BE2BC02CB230FC00FF863D /* MapViewCoordinator+MKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BBF2CB230FC00FF863D /* MapViewCoordinator+MKMapViewDelegate.swift */; };
-		F6BE2BC22CB2311600FF863D /* MapViewCoordinator+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BC12CB2311600FF863D /* MapViewCoordinator+Gesture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +43,6 @@
 		F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadAnnotation.swift; sourceTree = "<group>"; };
 		F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extensions.swift"; sourceTree = "<group>"; };
 		F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonLoader.swift; sourceTree = "<group>"; };
-		F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCoordinator.swift; sourceTree = "<group>"; };
 		F6BE2BAB2CB1C76000FF863D /* MKCoordinateRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegion.swift; sourceTree = "<group>"; };
 		F6BE2BAD2CB1CD2700FF863D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		F6BE2BAF2CB1CDB300FF863D /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
@@ -56,8 +52,6 @@
 		F6BE2BB82CB1D01900FF863D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F6BE2BBA2CB1D0B700FF863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F6BE2BBB2CB22A2900FF863D /* 44_diversey_belmont_final.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 44_diversey_belmont_final.geojson; sourceTree = "<group>"; };
-		F6BE2BBF2CB230FC00FF863D /* MapViewCoordinator+MKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewCoordinator+MKMapViewDelegate.swift"; sourceTree = "<group>"; };
-		F6BE2BC12CB2311600FF863D /* MapViewCoordinator+Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewCoordinator+Gesture.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,13 +123,10 @@
 		F6BE2BA22CB1C2AA00FF863D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F6BE2BBF2CB230FC00FF863D /* MapViewCoordinator+MKMapViewDelegate.swift */,
 				F6BE2B7A2CACE7C400FF863D /* ContentView.swift */,
 				F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */,
 				F6BE2B882CACEAB000FF863D /* MapView.swift */,
-				F6BE2BA92CB1C62A00FF863D /* MapViewCoordinator.swift */,
 				F6BE2BB82CB1D01900FF863D /* HomeView.swift */,
-				F6BE2BC12CB2311600FF863D /* MapViewCoordinator+Gesture.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -263,8 +254,6 @@
 				F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */,
 				F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */,
 				F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */,
-				F6BE2BAA2CB1C62A00FF863D /* MapViewCoordinator.swift in Sources */,
-				F6BE2BC22CB2311600FF863D /* MapViewCoordinator+Gesture.swift in Sources */,
 				F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */,
 				F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
@@ -272,7 +261,6 @@
 				F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */,
 				F6BE2B8B2CACEAD200FF863D /* ZoomControls.swift in Sources */,
 				F6BE2BAC2CB1C76000FF863D /* MKCoordinateRegion.swift in Sources */,
-				F6BE2BC02CB230FC00FF863D /* MapViewCoordinator+MKMapViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
