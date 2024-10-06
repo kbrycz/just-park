@@ -34,7 +34,7 @@ struct ContentView: View {
             }
         )
         .onAppear {
-            let result = GeoJSONLoader.loadGeoJSONData(fileName: "LakeViewStreets")
+            let result = GeoJSONLoader.loadGeoJSONData(fileName: "44_diversey_belmont_final")
             overlays = result.overlays
             annotations = result.annotations
             roads = result.roads

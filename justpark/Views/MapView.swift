@@ -11,11 +11,20 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
         mapView.delegate = context.coordinator
-        mapView.showsUserLocation = false
+
+        // Show user's location
+        mapView.showsUserLocation = true
+
+        // Set the map's initial region
         mapView.setRegion(locationManager.region, animated: true)
 
         // Exclude all points of interest
         mapView.pointOfInterestFilter = MKPointOfInterestFilter.excludingAll
+
+        // Add long-press gesture recognizer
+        let longPressRecognizer = UILongPressGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleLongPress(_:)))
+        longPressRecognizer.minimumPressDuration = 0.5
+        mapView.addGestureRecognizer(longPressRecognizer)
 
         return mapView
     }
