@@ -3,12 +3,12 @@
 import Foundation
 import MapKit
 
-class Road: Identifiable {
+class Road: Identifiable, ObservableObject {
     let id: Int
     let name: String
     let ward: Int
     let section: Int
-    var cleaningDates: [Date] = []
+    @Published var cleaningDates: [Date] = []
     let status: String
 
     init(id: Int, name: String, ward: Int, section: Int, status: String) {
@@ -18,25 +18,19 @@ class Road: Identifiable {
         self.section = section
         self.status = status
     }
-}
 
-class RoadOverlay: MKPolyline {
-    var road: Road?
-}
-
-extension Road {
     func nextCleaningDates() -> [Date] {
         let today = Date()
         let calendar = Calendar.current
 
         // Filter future dates or dates within the past week
         let relevantDates = cleaningDates.filter {
-            $0 >= today || calendar.dateComponents([.day], from: $0, to: today).day! <= 7
+            $0 >= today || (calendar.dateComponents([.day], from: $0, to: today).day ?? 0) <= 7
         }.sorted()
 
         // If the current month's dates have passed by at least one week, move to next month
         if let firstDate = relevantDates.first, firstDate < today {
-            let daysSinceDate = calendar.dateComponents([.day], from: firstDate, to: today).day!
+            let daysSinceDate = calendar.dateComponents([.day], from: firstDate, to: today).day ?? 0
             if daysSinceDate > 7 {
                 // Move to dates after this month
                 let nextMonthDates = relevantDates.filter {
@@ -50,7 +44,12 @@ extension Road {
         return Array(relevantDates.prefix(2))
     }
 
+
     func getStatus() -> String {
         return status
     }
+}
+
+class RoadOverlay: MKPolyline {
+    var road: Road?
 }

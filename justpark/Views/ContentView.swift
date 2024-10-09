@@ -90,11 +90,9 @@ struct ContentView: View {
         let calendar = Calendar.current
         var sampleDates: [Date] = []
 
-        // Create one date per week from October 5 to December 31
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        if let startDate = dateFormatter.date(from: "2023-10-05"),
-           let endDate = dateFormatter.date(from: "2023-12-31") {
+        // Create one date per week from today to 12 weeks ahead
+        let startDate = Date()
+        if let endDate = calendar.date(byAdding: .weekOfYear, value: 12, to: startDate) {
             var currentDate = startDate
             while currentDate <= endDate {
                 sampleDates.append(currentDate)
@@ -103,9 +101,13 @@ struct ContentView: View {
         }
 
         for road in roads {
-            print("Road ID: \(road.id), Name: \(road.name), Cleaning Dates Count: \(road.cleaningDates.count)")
             road.cleaningDates = sampleDates
         }
+        for road in roads {
+            print("Road ID: \(road.id), Name: \(road.name), Cleaning Dates Count: \(road.cleaningDates.count)")
+        }
+
         print("Assigned sample cleaning dates to roads.")
     }
+
 }
