@@ -4,42 +4,59 @@ import Foundation
 import MapKit
 
 struct GeoJSONLoader {
-    static func loadGeoJSONData(fileName: String) -> (overlays: [MKOverlay], annotations: [MKAnnotation], roads: [Road]) {
+    static func loadGeoJSONData(fileName: String, inSubdirectory subdirectory: String? = nil) -> (overlays: [MKOverlay], annotations: [MKAnnotation], roads: [Road]) {
         var overlays: [MKOverlay] = []
         var annotations: [MKAnnotation] = []
         var roads: [Road] = []
 
-        if let url = Bundle.main.url(forResource: fileName, withExtension: "geojson") {
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = MKGeoJSONDecoder()
-                let features = try decoder.decode(data) as? [MKGeoJSONFeature]
+        let bundle = Bundle.main
+        let url: URL?
 
-                for feature in features ?? [] {
-                    if let lineString = feature.geometry.first as? MKPolyline,
-                       let propertiesData = feature.properties,
-                       let properties = try JSONSerialization.jsonObject(with: propertiesData) as? [String: Any],
+        if let subdirectory = subdirectory {
+            url = bundle.url(forResource: fileName, withExtension: "geojson", subdirectory: subdirectory)
+        } else {
+            url = bundle.url(forResource: fileName, withExtension: "geojson")
+        }
+
+        guard let geoJSONURL = url else {
+            if let subdirectory = subdirectory {
+                print("Could not find \(subdirectory)/\(fileName).geojson")
+            } else {
+                print("Could not find \(fileName).geojson")
+            }
+            return (overlays, annotations, roads)
+        }
+        do {
+            let data = try Data(contentsOf: geoJSONURL)
+            // Parse the entire GeoJSON to extract ward and section
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let ward = json["ward"] as? Int,
+               let section = json["section"] as? Int,
+               let featuresArray = json["features"] as? [[String: Any]] {
+
+                print("Found \(featuresArray.count) features in GeoJSON.")
+
+                for (index, featureDict) in featuresArray.enumerated() {
+                    if let geometry = featureDict["geometry"] as? [String: Any],
+                       let geometryType = geometry["type"] as? String,
+                       geometryType == "LineString",
+                       let coordinatesArray = geometry["coordinates"] as? [[Double]],
+                       let properties = featureDict["properties"] as? [String: Any],
                        let id = properties["id"] as? Int,
-                       let name = properties["name"] as? String,
-                       let cleaningDatesStrings = properties["cleaning_dates"] as? [String] {
+                       let name = properties["name"] as? String {
 
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd"
-                        let cleaningDates = cleaningDatesStrings.compactMap { dateFormatter.date(from: $0) }
+                        // Convert coordinates to CLLocationCoordinate2D
+                        let coordinates = coordinatesArray.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
 
                         // Randomly assign a status
                         let statuses = ["red", "yellow", "green"]
                         let randomStatus = statuses.randomElement() ?? "green"
 
-                        let road = Road(id: id, name: name, cleaningDates: cleaningDates, status: randomStatus)
+                        let road = Road(id: id, name: name, ward: ward, section: section, status: randomStatus)
                         roads.append(road)
 
                         // Create RoadOverlay
-                        let pointCount = lineString.pointCount
-                        var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: pointCount)
-                        lineString.getCoordinates(&coordinates, range: NSRange(location: 0, length: pointCount))
-
-                        let polyline = RoadOverlay(coordinates: coordinates, count: pointCount)
+                        let polyline = RoadOverlay(coordinates: coordinates, count: coordinates.count)
                         polyline.road = road
 
                         overlays.append(polyline)
@@ -52,14 +69,16 @@ struct GeoJSONLoader {
                                 annotations.append(annotation)
                             }
                         }
+                    } else {
+                        print("Feature at index \(index) is missing required properties.")
                     }
                 }
-
-            } catch {
-                print("Error loading GeoJSON data: \(error)")
+                print("Loaded \(roads.count) roads from \(fileName).geojson")
+            } else {
+                print("Error parsing GeoJSON data: Missing ward or section.")
             }
-        } else {
-            print("Could not find \(fileName).geojson")
+        } catch {
+            print("Error loading GeoJSON data: \(error)")
         }
 
         return (overlays, annotations, roads)

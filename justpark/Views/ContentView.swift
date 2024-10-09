@@ -8,15 +8,26 @@ struct ContentView: View {
     @State private var overlays: [MKOverlay] = []
     @State private var annotations: [MKAnnotation] = []
     @State private var isModalPresented = false
-    @State private var modalTitle = ""
-    @State private var modalMessage = ""
+    @State private var road: Road?
     @State private var roads: [Road] = []
+    @State private var isLoading = true
 
     var body: some View {
         ZStack {
             MapView(overlays: $overlays, annotations: $annotations)
                 .environmentObject(locationManager)
                 .edgesIgnoringSafeArea(.all)
+                .overlay(
+                    Group {
+                        if isLoading {
+                            ProgressView("Loading...")
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .padding()
+                                .background(Color.white.opacity(0.8))
+                                .cornerRadius(10)
+                        }
+                    }
+                )
 
             ZoomControls()
                 .environmentObject(locationManager)
@@ -24,8 +35,8 @@ struct ContentView: View {
                 .padding(.trailing, 20)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
 
-            if isModalPresented {
-                RoadInfoModalView(roadName: modalTitle, message: modalMessage, isPresented: $isModalPresented)
+            if isModalPresented, let road = road {
+                RoadInfoModalView(road: road, isPresented: $isModalPresented)
             }
         }
         .navigationBarTitle("Street Cleaning", displayMode: .inline)
@@ -39,28 +50,62 @@ struct ContentView: View {
             }
         )
         .onAppear {
-            let result = GeoJSONLoader.loadGeoJSONData(fileName: "44_diversey_belmont_final") // Use your geojson file
-            overlays = result.overlays
-            annotations = result.annotations
-            roads = result.roads
+            // Load the GeoJSON data
+            DispatchQueue.global(qos: .userInitiated).async {
+                let result = GeoJSONLoader.loadGeoJSONData(fileName: "section_1", inSubdirectory: "ward_44")
+                DispatchQueue.main.async {
+                    overlays = result.overlays
+                    annotations = result.annotations
+                    roads = result.roads
+                    isLoading = false
+                    print("Map data loaded successfully.")
+
+                    // Fetch cleaning dates once when the map is loaded
+                    fetchCleaningDates()
+                }
+            }
         }
         .onReceive(locationManager.$selectedRoad) { road in
             if let road = road {
-                if let nextDate = road.nextCleaningDate() {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateStyle = .full // Include day of the week
-                    let dateString = dateFormatter.string(from: nextDate)
-                    modalTitle = road.name
-                    modalMessage = "Next street cleaning on \(dateString)"
-                } else {
-                    modalTitle = road.name
-                    modalMessage = "No more street cleaning this year! Check back early next year!"
+                // Avoid modifying state variables within view updates
+                DispatchQueue.main.async {
+                    self.road = road
+                    withAnimation {
+                        self.isModalPresented = true
+                    }
+                    // Reset the selected road after a delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        locationManager.selectedRoad = nil
+                    }
                 }
-                withAnimation {
-                    isModalPresented = true
-                }
-                locationManager.selectedRoad = nil
             }
         }
+    }
+
+    private func fetchCleaningDates() {
+        // Implement API call here
+        // For now, we'll assign dummy data
+        print("Fetching cleaning dates from API...")
+
+        let calendar = Calendar.current
+        var sampleDates: [Date] = []
+
+        // Create one date per week from October 5 to December 31
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let startDate = dateFormatter.date(from: "2023-10-05"),
+           let endDate = dateFormatter.date(from: "2023-12-31") {
+            var currentDate = startDate
+            while currentDate <= endDate {
+                sampleDates.append(currentDate)
+                currentDate = calendar.date(byAdding: .weekOfYear, value: 1, to: currentDate)!
+            }
+        }
+
+        for road in roads {
+            print("Road ID: \(road.id), Name: \(road.name), Cleaning Dates Count: \(road.cleaningDates.count)")
+            road.cleaningDates = sampleDates
+        }
+        print("Assigned sample cleaning dates to roads.")
     }
 }

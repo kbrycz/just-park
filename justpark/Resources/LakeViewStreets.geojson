@@ -1,12 +1,13 @@
 {
   "type": "FeatureCollection",
+  "ward": 44,
+  "section": 1
   "features": [
     {
       "type": "Feature",
       "properties": {
         "id": 1,
         "name": "N Clark St",
-        "cleaning_dates": ["2024-10-02", "2024-11-06", "2024-12-04"]
       },
       "geometry": {
         "type": "LineString",
@@ -25,7 +26,6 @@
       "properties": {
         "id": 2,
         "name": "W Belmont Ave",
-        "cleaning_dates": ["2024-10-05", "2024-11-12", "2024-12-10"]
       },
       "geometry": {
         "type": "LineString",

@@ -3,8 +3,7 @@
 import SwiftUI
 
 struct RoadInfoModalView: View {
-    var roadName: String
-    var message: String
+    var road: Road
     @Binding var isPresented: Bool
 
     var body: some View {
@@ -20,15 +19,32 @@ struct RoadInfoModalView: View {
 
             // Modal content
             VStack(spacing: 20) {
-                Text(roadName)
-                    .font(.custom("Quicksand-Bold", size: 18)) // Reduced font size
+                Text(road.name.isEmpty ? "Unknown Road" : road.name)
+                    .font(.custom("Quicksand-Bold", size: 18))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
 
-                Text(message)
-                    .font(.custom("Quicksand-Regular", size: 14)) // Reduced font size
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
+                let nextDates = road.nextCleaningDates()
+
+                if nextDates.isEmpty {
+                    Text("Unable to get upcoming cleaning dates.")
+                        .font(.custom("Quicksand-Regular", size: 14))
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                } else {
+                    VStack(alignment: .leading, spacing: 10) {
+                        ForEach(nextDates, id: \.self) { date in
+                            HStack {
+                                Text(dateString(from: date))
+                                    .font(.custom("Quicksand-Regular", size: 14))
+                                    .foregroundColor(color(for: date))
+                                Spacer()
+                            }
+                        }
+                    }
+                    .padding()
+                }
 
                 Button(action: {
                     withAnimation {
@@ -50,5 +66,26 @@ struct RoadInfoModalView: View {
             .shadow(radius: 10)
             .padding(.horizontal, 40)
         }
+    }
+
+    // Helper function to format the date
+    func dateString(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full // E.g., "Tuesday, October 3, 2023"
+        return dateFormatter.string(from: date)
+    }
+
+    // Helper function to determine the color based on urgency
+    func color(for date: Date) -> Color {
+        let calendar = Calendar.current
+        let today = Date()
+        if let days = calendar.dateComponents([.day], from: today, to: date).day {
+            if days <= 3 {
+                return .red
+            } else if days <= 7 {
+                return .yellow
+            }
+        }
+        return .black
     }
 }
