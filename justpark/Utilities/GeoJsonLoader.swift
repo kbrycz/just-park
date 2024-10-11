@@ -32,7 +32,7 @@ struct GeoJSONLoader {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                let ward = json["ward"] as? Int,
                let sectionNumber = json["section"] as? Int,
-               let hood = json["hood"] as? String,  // Extract hood from JSON
+               let hood = json["hood"] as? String,
                let featuresArray = json["features"] as? [[String: Any]] {
 
                 print("Found \(featuresArray.count) features in GeoJSON.")
@@ -60,10 +60,11 @@ struct GeoJSONLoader {
                     }
 
                     // Create the polygon
-                    let polygon = MKPolygon(coordinates: coordinates, count: coordinates.count)
+                    let polygon = SectionOverlay(coordinates: coordinates, count: coordinates.count)
                     // Create the Section with hood
                     let newSection = Section(ward: ward, sectionNumber: sectionNumber, hood: hood)
                     newSection.polygon = polygon
+                    polygon.section = newSection // Set the section reference
                     section = newSection
                     polygon.title = "SectionOverlay"
 

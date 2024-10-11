@@ -54,11 +54,12 @@ struct SectionInfoModalView: View {
                 } else {
 
                     // Cleaning Dates List
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .center, spacing: 8) {  // Changed alignment to .center
                         ForEach(nextDates, id: \.self) { date in
                             Text(dateString(from: date))
                                 .font(.custom("Quicksand-Medium", size: 18))
                                 .foregroundColor(.black)
+                                .multilineTextAlignment(.center) // Center the text
                         }
                     }
                     .padding(.horizontal)
@@ -109,8 +110,6 @@ struct SectionInfoModalView: View {
                     .padding(.horizontal)
                 }
                 .padding(.bottom, 24) // Added spacing at the bottom
-
-
             }
             .padding(.top, 20) // Added top padding to the modal content
             .background(Color.white)

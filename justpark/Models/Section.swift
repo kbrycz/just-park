@@ -7,7 +7,7 @@ class Section: Identifiable, ObservableObject {
     let id = UUID()
     let ward: Int
     let sectionNumber: Int
-    let hood: String  // Added hood property
+    let hood: String  // Already added hood property
     @Published var cleaningDates: [Date] = []
     var polygon: MKPolygon?
 
@@ -26,5 +26,17 @@ class Section: Identifiable, ObservableObject {
         }.sorted()
 
         return Array(relevantDates.prefix(2))
+    }
+
+    // Added function to get days until next cleaning date
+    func daysUntilNextCleaning() -> Int? {
+        let today = Date()
+        if let nextDate = nextCleaningDates().first {
+            let calendar = Calendar.current
+            if let days = calendar.dateComponents([.day], from: today, to: nextDate).day {
+                return days
+            }
+        }
+        return nil
     }
 }

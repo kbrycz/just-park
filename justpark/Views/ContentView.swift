@@ -81,24 +81,38 @@ struct ContentView: View {
     }
 
     private func fetchCleaningDates() {
-        // Implement API call here
-        // For now, we'll assign dummy data
         print("Fetching cleaning dates from API...")
 
         let calendar = Calendar.current
         var sampleDates: [Date] = []
 
-        // Create one date per week from today to 12 weeks ahead
-        let startDate = Date()
-        if let endDate = calendar.date(byAdding: .weekOfYear, value: 12, to: startDate) {
-            var currentDate = startDate
-            while currentDate <= endDate {
-                sampleDates.append(currentDate)
-                currentDate = calendar.date(byAdding: .weekOfYear, value: 1, to: currentDate)!
-            }
+        // Add dates for testing
+        let today = Date()
+        if let dateIn2Days = calendar.date(byAdding: .day, value: 2, to: today),
+           let dateIn5Days = calendar.date(byAdding: .day, value: 5, to: today),
+           let dateIn10Days = calendar.date(byAdding: .day, value: 10, to: today) {
+            sampleDates.append(contentsOf: [dateIn2Days, dateIn5Days, dateIn10Days])
         }
 
         section?.cleaningDates = sampleDates
         print("Assigned sample cleaning dates to section.")
+
+        // Force the overlays to update
+        if let sectionOverlay = section?.polygon as? SectionOverlay {
+            // Create a new overlay to force renderer to update
+            let pointCount = sectionOverlay.pointCount
+            var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: pointCount)
+            sectionOverlay.getCoordinates(&coordinates, range: NSRange(location: 0, length: pointCount))
+
+            let newOverlay = SectionOverlay(coordinates: coordinates, count: pointCount)
+            newOverlay.section = section
+            newOverlay.title = sectionOverlay.title
+
+            // Update the section's polygon
+            section?.polygon = newOverlay
+
+            // Update the overlays
+            overlays = [newOverlay]
+        }
     }
 }
