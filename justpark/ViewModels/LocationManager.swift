@@ -2,22 +2,23 @@
 
 import Foundation
 import MapKit
+import Combine
 
 class LocationManager: NSObject, ObservableObject {
-    @Published var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 41.9500, longitude: -87.6590), // Centered on Lakeview
-        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-    )
+    @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 41.936, longitude: -87.656), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+    @Published var selectedSection: Section?
 
-    @Published var selectedRoad: Road?
+    override init() {
+        super.init()
+    }
 
     func zoomIn() {
-        region.span.latitudeDelta /= 2
-        region.span.longitudeDelta /= 2
+        let newSpan = MKCoordinateSpan(latitudeDelta: region.span.latitudeDelta * 0.5, longitudeDelta: region.span.longitudeDelta * 0.5)
+        region.span = newSpan
     }
 
     func zoomOut() {
-        region.span.latitudeDelta *= 2
-        region.span.longitudeDelta *= 2
+        let newSpan = MKCoordinateSpan(latitudeDelta: region.span.latitudeDelta * 2.0, longitudeDelta: region.span.longitudeDelta * 2.0)
+        region.span = newSpan
     }
 }

@@ -4,10 +4,10 @@ import Foundation
 import MapKit
 
 struct GeoJSONLoader {
-    static func loadGeoJSONData(fileName: String, inSubdirectory subdirectory: String? = nil) -> (overlays: [MKOverlay], annotations: [MKAnnotation], roads: [Road]) {
+    static func loadSectionGeoJSONData(fileName: String, inSubdirectory subdirectory: String? = nil) -> (overlays: [MKOverlay], annotations: [MKAnnotation], section: Section?) {
         var overlays: [MKOverlay] = []
         var annotations: [MKAnnotation] = []
-        var roads: [Road] = []
+        var section: Section?
 
         let bundle = Bundle.main
         let url: URL?
@@ -24,56 +24,51 @@ struct GeoJSONLoader {
             } else {
                 print("Could not find \(fileName).geojson")
             }
-            return (overlays, annotations, roads)
+            return (overlays, annotations, section)
         }
+
         do {
             let data = try Data(contentsOf: geoJSONURL)
-            // Parse the entire GeoJSON to extract ward and section
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                let ward = json["ward"] as? Int,
-               let section = json["section"] as? Int,
+               let sectionNumber = json["section"] as? Int,
                let featuresArray = json["features"] as? [[String: Any]] {
 
                 print("Found \(featuresArray.count) features in GeoJSON.")
+
+                var coordinates: [CLLocationCoordinate2D] = []
 
                 for (index, featureDict) in featuresArray.enumerated() {
                     if let geometry = featureDict["geometry"] as? [String: Any],
                        let geometryType = geometry["type"] as? String,
                        geometryType == "LineString",
-                       let coordinatesArray = geometry["coordinates"] as? [[Double]],
-                       let properties = featureDict["properties"] as? [String: Any],
-                       let id = properties["id"] as? Int,
-                       let name = properties["name"] as? String {
+                       let coordinatesArray = geometry["coordinates"] as? [[Double]] {
 
-                        // Convert coordinates to CLLocationCoordinate2D
-                        let coordinates = coordinatesArray.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
-
-                        // Randomly assign a status
-                        let statuses = ["red", "yellow", "green"]
-                        let randomStatus = statuses.randomElement() ?? "green"
-
-                        let road = Road(id: id, name: name, ward: ward, section: section, status: randomStatus)
-                        roads.append(road)
-
-                        // Create RoadOverlay
-                        let polyline = RoadOverlay(coordinates: coordinates, count: coordinates.count)
-                        polyline.road = road
-
-                        overlays.append(polyline)
-
-                        // Place annotations along the polyline
-                        for (index, coordinate) in coordinates.enumerated() {
-                            if index % 2 == 0 {
-                                let annotation = RoadAnnotation(coordinate: coordinate)
-                                annotation.road = road
-                                annotations.append(annotation)
-                            }
-                        }
+                        // Convert coordinates to CLLocationCoordinate2D and append
+                        let lineCoordinates = coordinatesArray.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
+                        coordinates.append(contentsOf: lineCoordinates)
                     } else {
                         print("Feature at index \(index) is missing required properties.")
                     }
                 }
-                print("Loaded \(roads.count) roads from \(fileName).geojson")
+
+                if !coordinates.isEmpty {
+                    // Close the polygon by adding the first coordinate at the end if necessary
+                    if coordinates.first != coordinates.last {
+                        coordinates.append(coordinates.first!)
+                    }
+
+                    // Create the polygon
+                    let polygon = MKPolygon(coordinates: coordinates, count: coordinates.count)
+                    // Create the Section
+                    let newSection = Section(ward: ward, sectionNumber: sectionNumber)
+                    newSection.polygon = polygon
+                    section = newSection
+                    polygon.title = "SectionOverlay"
+
+                    overlays.append(polygon)
+                }
+
             } else {
                 print("Error parsing GeoJSON data: Missing ward or section.")
             }
@@ -81,6 +76,6 @@ struct GeoJSONLoader {
             print("Error loading GeoJSON data: \(error)")
         }
 
-        return (overlays, annotations, roads)
+        return (overlays, annotations, section)
     }
 }

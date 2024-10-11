@@ -8,13 +8,12 @@ struct ContentView: View {
     @State private var overlays: [MKOverlay] = []
     @State private var annotations: [MKAnnotation] = []
     @State private var isModalPresented = false
-    @State private var road: Road?
-    @State private var roads: [Road] = []
+    @State private var section: Section?
     @State private var isLoading = true
 
     var body: some View {
         ZStack {
-            MapView(overlays: $overlays, annotations: $annotations)
+            MapView(overlays: $overlays, annotations: $annotations, section: $section)
                 .environmentObject(locationManager)
                 .edgesIgnoringSafeArea(.all)
                 .overlay(
@@ -35,8 +34,8 @@ struct ContentView: View {
                 .padding(.trailing, 20)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
 
-            if isModalPresented, let road = road {
-                RoadInfoModalView(road: road, isPresented: $isModalPresented)
+            if isModalPresented, let section = section {
+                SectionInfoModalView(section: section, isPresented: $isModalPresented)
             }
         }
         .navigationBarTitle("Street Cleaning", displayMode: .inline)
@@ -52,11 +51,11 @@ struct ContentView: View {
         .onAppear {
             // Load the GeoJSON data
             DispatchQueue.global(qos: .userInitiated).async {
-                let result = GeoJSONLoader.loadGeoJSONData(fileName: "section_8", inSubdirectory: "ward_44")
+                let result = GeoJSONLoader.loadSectionGeoJSONData(fileName: "section_8", inSubdirectory: "ward_44")
                 DispatchQueue.main.async {
                     overlays = result.overlays
                     annotations = result.annotations
-                    roads = result.roads
+                    section = result.section
                     isLoading = false
                     print("Map data loaded successfully.")
 
@@ -65,17 +64,16 @@ struct ContentView: View {
                 }
             }
         }
-        .onReceive(locationManager.$selectedRoad) { road in
-            if let road = road {
-                // Avoid modifying state variables within view updates
+        .onReceive(locationManager.$selectedSection) { selectedSection in
+            if let selectedSection = selectedSection {
                 DispatchQueue.main.async {
-                    self.road = road
+                    self.section = selectedSection
                     withAnimation {
                         self.isModalPresented = true
                     }
-                    // Reset the selected road after a delay
+                    // Reset the selected section after a delay
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        locationManager.selectedRoad = nil
+                        locationManager.selectedSection = nil
                     }
                 }
             }
@@ -100,14 +98,7 @@ struct ContentView: View {
             }
         }
 
-        for road in roads {
-            road.cleaningDates = sampleDates
-        }
-        for road in roads {
-            print("Road ID: \(road.id), Name: \(road.name), Cleaning Dates Count: \(road.cleaningDates.count)")
-        }
-
-        print("Assigned sample cleaning dates to roads.")
+        section?.cleaningDates = sampleDates
+        print("Assigned sample cleaning dates to section.")
     }
-
 }

@@ -7,6 +7,7 @@ struct MapView: UIViewRepresentable {
     @EnvironmentObject var locationManager: LocationManager
     @Binding var overlays: [MKOverlay]
     @Binding var annotations: [MKAnnotation]
+    @Binding var section: Section?
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
@@ -20,6 +21,10 @@ struct MapView: UIViewRepresentable {
 
         // Exclude all points of interest
         mapView.pointOfInterestFilter = MKPointOfInterestFilter.excludingAll
+
+        // Add tap gesture recognizer
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleTap(_:)))
+        mapView.addGestureRecognizer(tapGesture)
 
         return mapView
     }
