@@ -2,6 +2,7 @@
   "type": "FeatureCollection",
   "ward": 44,
   "section": 8,
+  "hood": "Lakeview",
   "features": [
     {
       "type": "Feature",

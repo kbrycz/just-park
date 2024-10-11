@@ -7,12 +7,14 @@ class Section: Identifiable, ObservableObject {
     let id = UUID()
     let ward: Int
     let sectionNumber: Int
+    let hood: String  // Added hood property
     @Published var cleaningDates: [Date] = []
     var polygon: MKPolygon?
 
-    init(ward: Int, sectionNumber: Int) {
+    init(ward: Int, sectionNumber: Int, hood: String) {
         self.ward = ward
         self.sectionNumber = sectionNumber
+        self.hood = hood  // Initialize hood
     }
 
     func nextCleaningDates() -> [Date] {

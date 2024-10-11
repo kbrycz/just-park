@@ -32,6 +32,7 @@ struct GeoJSONLoader {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                let ward = json["ward"] as? Int,
                let sectionNumber = json["section"] as? Int,
+               let hood = json["hood"] as? String,  // Extract hood from JSON
                let featuresArray = json["features"] as? [[String: Any]] {
 
                 print("Found \(featuresArray.count) features in GeoJSON.")
@@ -60,8 +61,8 @@ struct GeoJSONLoader {
 
                     // Create the polygon
                     let polygon = MKPolygon(coordinates: coordinates, count: coordinates.count)
-                    // Create the Section
-                    let newSection = Section(ward: ward, sectionNumber: sectionNumber)
+                    // Create the Section with hood
+                    let newSection = Section(ward: ward, sectionNumber: sectionNumber, hood: hood)
                     newSection.polygon = polygon
                     section = newSection
                     polygon.title = "SectionOverlay"
@@ -70,7 +71,7 @@ struct GeoJSONLoader {
                 }
 
             } else {
-                print("Error parsing GeoJSON data: Missing ward or section.")
+                print("Error parsing GeoJSON data: Missing ward, section, or hood.")
             }
         } catch {
             print("Error loading GeoJSON data: \(error)")

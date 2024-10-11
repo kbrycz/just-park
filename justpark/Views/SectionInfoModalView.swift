@@ -6,6 +6,8 @@ struct SectionInfoModalView: View {
     @ObservedObject var section: Section
     @Binding var isPresented: Bool
 
+    @State private var isShareSheetPresented = false
+
     var body: some View {
         ZStack {
             // Background overlay
@@ -26,66 +28,89 @@ struct SectionInfoModalView: View {
                         .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
-
-                    // Description
-                    Text("Different sides of the street may have different dates.")
-                        .font(.custom("Quicksand-Regular", size: 14))
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 8)
                 }
-                .padding(.bottom, 16) // Increased spacing after the header
+                
+                // Display Hood
+                Text(section.hood)
+                    .font(.custom("Quicksand-Regular", size: 14))
+                    .lineSpacing(5)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 8)
+                    .padding(.bottom, 16)
 
                 Divider()
                     .padding(.horizontal)
-                    .padding(.bottom, 16) // Added spacing after the divider
+                    .padding(.bottom, 24) // Added spacing after the divider
 
                 let nextDates = section.nextCleaningDates()
 
                 if nextDates.isEmpty {
                     Text("Unable to get upcoming cleaning dates.")
-                        .font(.custom("Quicksand-Regular", size: 14))
+                        .font(.custom("Quicksand-Medium", size: 16))
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                 } else {
-                    // Title
-                    Text("Cleaning Dates:")
-                        .font(.custom("Quicksand-Medium", size: 16))
-                        .foregroundColor(.black)
-                        .padding(.horizontal)
-                        .padding(.bottom, 8) // Added spacing after the title
 
                     // Cleaning Dates List
                     VStack(alignment: .leading, spacing: 8) {
                         ForEach(nextDates, id: \.self) { date in
                             Text(dateString(from: date))
-                                .font(.custom("Quicksand-Regular", size: 14))
-                                .foregroundColor(color(for: date))
+                                .font(.custom("Quicksand-Medium", size: 18))
+                                .foregroundColor(.black)
                         }
                     }
                     .padding(.horizontal)
                 }
-
+                
                 Spacer()
-                    .frame(height: 30) // Added more space before the button
+                    .frame(height: 30) // Added more space before the buttons
+                
+                // Description
+                Text("Different sides of the street will have different cleaning dates. Often the odd-number addresses (usually west/north) will be cleaned first.")
+                    .font(.custom("Quicksand-Regular", size: 10))
+                    .lineSpacing(5)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                    .padding(.bottom, 24)
 
-                // Button
-                Button(action: {
-                    withAnimation {
-                        isPresented = false
+                // Buttons
+                VStack(spacing: 10) {
+                    // OK Button
+                    Button(action: {
+                        withAnimation {
+                            isPresented = false
+                        }
+                    }) {
+                        Text("OK")
+                            .font(.custom("Quicksand-Medium", size: 14))
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.customBackground)
+                            .cornerRadius(10)
                     }
-                }) {
-                    Text("OK")
-                        .font(.custom("Quicksand-Medium", size: 14))
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.customBackground)
-                        .cornerRadius(10)
+                    .padding(.horizontal)
+
+                    // Share Button
+                    Button(action: {
+                        isShareSheetPresented = true
+                    }) {
+                        Text("Share")
+                            .font(.custom("Quicksand-Medium", size: 14))
+                            .foregroundColor(.customBackground)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(10)
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 10) // Added spacing at the bottom
+                .padding(.bottom, 24) // Added spacing at the bottom
+
+
             }
             .padding(.top, 20) // Added top padding to the modal content
             .background(Color.white)
@@ -95,6 +120,10 @@ struct SectionInfoModalView: View {
             .onAppear {
                 print("Modal presented for Ward \(section.ward), Section \(section.sectionNumber), Cleaning Dates Count: \(section.cleaningDates.count)")
             }
+            // Share Sheet Presentation
+            .sheet(isPresented: $isShareSheetPresented) {
+                ShareSheet(items: [shareContent()])
+            }
         }
     }
 
@@ -103,6 +132,23 @@ struct SectionInfoModalView: View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full // E.g., "Tuesday, October 3, 2024"
         return dateFormatter.string(from: date)
+    }
+
+    // Function to prepare content for sharing
+    private func shareContent() -> String {
+        var content = ""
+        content += "Ward \(section.ward), Section \(section.sectionNumber)\n"
+        content += "\(section.hood)\n\n"
+        content += "Upcoming Cleaning Dates:\n"
+        let nextDates = section.nextCleaningDates()
+        if nextDates.isEmpty {
+            content += "Unable to get upcoming cleaning dates."
+        } else {
+            for date in nextDates {
+                content += "- \(dateString(from: date))\n"
+            }
+        }
+        return content
     }
 
     // Helper function to determine the color based on urgency
