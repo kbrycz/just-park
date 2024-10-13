@@ -51,7 +51,7 @@ struct ContentView: View {
         .onAppear {
             // Load the GeoJSON data
             DispatchQueue.global(qos: .userInitiated).async {
-                let result = GeoJSONLoader.loadSectionGeoJSONData(fileName: "section_8", inSubdirectory: "ward_44")
+                let result = GeoJSONLoader.loadSectionGeoJSONData(fileName: "section_9", inSubdirectory: "ward_44")
                 DispatchQueue.main.async {
                     overlays = result.overlays
                     annotations = result.annotations

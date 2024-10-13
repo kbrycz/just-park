@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F6479A042CBC4B3600FA7705 /* RoadContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A032CBC4B2E00FA7705 /* RoadContentView.swift */; };
+		F6479A062CBC4B4B00FA7705 /* RoadMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A052CBC4B4800FA7705 /* RoadMapView.swift */; };
+		F6479A082CBC4B6100FA7705 /* RoadMapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A072CBC4B5C00FA7705 /* RoadMapViewCoordinator.swift */; };
 		F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B782CACE7C400FF863D /* justparkApp.swift */; };
 		F6BE2B7B2CACE7C400FF863D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B7A2CACE7C400FF863D /* ContentView.swift */; };
 		F6BE2B7D2CACE7C500FF863D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */; };
@@ -15,7 +18,6 @@
 		F6BE2B892CACEAB000FF863D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B882CACEAB000FF863D /* MapView.swift */; };
 		F6BE2B8B2CACEAD200FF863D /* ZoomControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */; };
 		F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B8E2CACEF1300FF863D /* Road.swift */; };
-		F6BE2B962CACF56500FF863D /* LakeViewStreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */; };
 		F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */; };
 		F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */; };
 		F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */; };
@@ -26,11 +28,21 @@
 		F6BE2BB42CB1CDB300FF863D /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BB12CB1CDB300FF863D /* Quicksand-Bold.ttf */; };
 		F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BB62CB1CE9500FF863D /* Color.swift */; };
 		F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BB82CB1D01900FF863D /* HomeView.swift */; };
-		F6BE2BBC2CB22A2900FF863D /* 44_diversey_belmont_final.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BBB2CB22A2900FF863D /* 44_diversey_belmont_final.geojson */; };
-		F6BE2BC72CB3109D00FF863D /* RoadInfoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BC62CB3109D00FF863D /* RoadInfoModalView.swift */; };
+		F6BE2BC92CB5F65F00FF863D /* MapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BC82CB5F65F00FF863D /* MapViewCoordinator.swift */; };
+		F6BE2BCB2CB5F68E00FF863D /* MKCoordinateRegion+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BCA2CB5F68E00FF863D /* MKCoordinateRegion+Extensions.swift */; };
+		F6BE2BD22CB600DD00FF863D /* CleaningDatesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BD12CB600DD00FF863D /* CleaningDatesFetcher.swift */; };
+		F6BE2BDC2CB7287E00FF863D /* ward_44 in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2BDB2CB7287E00FF863D /* ward_44 */; };
+		F6BE2BDE2CB8BCCF00FF863D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BDD2CB8BCCF00FF863D /* Section.swift */; };
+		F6BE2BE02CB8BD1A00FF863D /* SectionInfoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BDF2CB8BD1A00FF863D /* SectionInfoModalView.swift */; };
+		F6BE2BE22CB8BD9900FF863D /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BE12CB8BD9900FF863D /* CLLocationCoordinate2D.swift */; };
+		F6BE2BE42CB8C64700FF863D /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BE32CB8C64700FF863D /* ShareSheet.swift */; };
+		F6BE2BE62CB9CFB000FF863D /* SectionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BE52CB9CFB000FF863D /* SectionOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F6479A032CBC4B2E00FA7705 /* RoadContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadContentView.swift; sourceTree = "<group>"; };
+		F6479A052CBC4B4800FA7705 /* RoadMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadMapView.swift; sourceTree = "<group>"; };
+		F6479A072CBC4B5C00FA7705 /* RoadMapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadMapViewCoordinator.swift; sourceTree = "<group>"; };
 		F6BE2B752CACE7C400FF863D /* justpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = justpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6BE2B782CACE7C400FF863D /* justparkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = justparkApp.swift; sourceTree = "<group>"; };
 		F6BE2B7A2CACE7C400FF863D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,7 +52,6 @@
 		F6BE2B882CACEAB000FF863D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomControls.swift; sourceTree = "<group>"; };
 		F6BE2B8E2CACEF1300FF863D /* Road.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Road.swift; sourceTree = "<group>"; };
-		F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = LakeViewStreets.geojson; sourceTree = "<group>"; };
 		F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadAnnotation.swift; sourceTree = "<group>"; };
 		F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extensions.swift"; sourceTree = "<group>"; };
 		F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonLoader.swift; sourceTree = "<group>"; };
@@ -52,8 +63,15 @@
 		F6BE2BB62CB1CE9500FF863D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		F6BE2BB82CB1D01900FF863D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F6BE2BBA2CB1D0B700FF863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		F6BE2BBB2CB22A2900FF863D /* 44_diversey_belmont_final.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 44_diversey_belmont_final.geojson; sourceTree = "<group>"; };
-		F6BE2BC62CB3109D00FF863D /* RoadInfoModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadInfoModalView.swift; sourceTree = "<group>"; };
+		F6BE2BC82CB5F65F00FF863D /* MapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCoordinator.swift; sourceTree = "<group>"; };
+		F6BE2BCA2CB5F68E00FF863D /* MKCoordinateRegion+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extensions.swift"; sourceTree = "<group>"; };
+		F6BE2BD12CB600DD00FF863D /* CleaningDatesFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleaningDatesFetcher.swift; sourceTree = "<group>"; };
+		F6BE2BDB2CB7287E00FF863D /* ward_44 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ward_44; sourceTree = "<group>"; };
+		F6BE2BDD2CB8BCCF00FF863D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		F6BE2BDF2CB8BD1A00FF863D /* SectionInfoModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfoModalView.swift; sourceTree = "<group>"; };
+		F6BE2BE12CB8BD9900FF863D /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
+		F6BE2BE32CB8C64700FF863D /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		F6BE2BE52CB9CFB000FF863D /* SectionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +136,8 @@
 			children = (
 				F6BE2B8E2CACEF1300FF863D /* Road.swift */,
 				F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */,
+				F6BE2BDD2CB8BCCF00FF863D /* Section.swift */,
+				F6BE2BE52CB9CFB000FF863D /* SectionOverlay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -125,11 +145,15 @@
 		F6BE2BA22CB1C2AA00FF863D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F6479A072CBC4B5C00FA7705 /* RoadMapViewCoordinator.swift */,
+				F6479A052CBC4B4800FA7705 /* RoadMapView.swift */,
+				F6479A032CBC4B2E00FA7705 /* RoadContentView.swift */,
 				F6BE2B7A2CACE7C400FF863D /* ContentView.swift */,
 				F6BE2B8A2CACEAD200FF863D /* ZoomControls.swift */,
 				F6BE2B882CACEAB000FF863D /* MapView.swift */,
 				F6BE2BB82CB1D01900FF863D /* HomeView.swift */,
-				F6BE2BC62CB3109D00FF863D /* RoadInfoModalView.swift */,
+				F6BE2BC82CB5F65F00FF863D /* MapViewCoordinator.swift */,
+				F6BE2BDF2CB8BD1A00FF863D /* SectionInfoModalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -147,6 +171,8 @@
 			children = (
 				F6BE2B9D2CACFE6F00FF863D /* MKMapView+Extensions.swift */,
 				F6BE2BAB2CB1C76000FF863D /* MKCoordinateRegion.swift */,
+				F6BE2BCA2CB5F68E00FF863D /* MKCoordinateRegion+Extensions.swift */,
+				F6BE2BE12CB8BD9900FF863D /* CLLocationCoordinate2D.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -155,6 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */,
+				F6BE2BD12CB600DD00FF863D /* CleaningDatesFetcher.swift */,
+				F6BE2BE32CB8C64700FF863D /* ShareSheet.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -162,8 +190,7 @@
 		F6BE2BA62CB1C2CD00FF863D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F6BE2BBB2CB22A2900FF863D /* 44_diversey_belmont_final.geojson */,
-				F6BE2B952CACF54B00FF863D /* LakeViewStreets.geojson */,
+				F6BE2BDB2CB7287E00FF863D /* ward_44 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -234,12 +261,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6BE2BDC2CB7287E00FF863D /* ward_44 in Resources */,
 				F6BE2BB42CB1CDB300FF863D /* Quicksand-Bold.ttf in Resources */,
 				F6BE2BAE2CB1CD2700FF863D /* logo.png in Resources */,
-				F6BE2B962CACF56500FF863D /* LakeViewStreets.geojson in Resources */,
 				F6BE2B802CACE7C500FF863D /* Preview Assets.xcassets in Resources */,
 				F6BE2B7D2CACE7C500FF863D /* Assets.xcassets in Resources */,
-				F6BE2BBC2CB22A2900FF863D /* 44_diversey_belmont_final.geojson in Resources */,
 				F6BE2BB22CB1CDB300FF863D /* Quicksand-Regular.ttf in Resources */,
 				F6BE2BB32CB1CDB300FF863D /* Quicksand-Medium.ttf in Resources */,
 			);
@@ -252,17 +278,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6BE2BDE2CB8BCCF00FF863D /* Section.swift in Sources */,
 				F6BE2B7B2CACE7C400FF863D /* ContentView.swift in Sources */,
 				F6BE2B892CACEAB000FF863D /* MapView.swift in Sources */,
+				F6BE2BC92CB5F65F00FF863D /* MapViewCoordinator.swift in Sources */,
+				F6479A082CBC4B6100FA7705 /* RoadMapViewCoordinator.swift in Sources */,
 				F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */,
+				F6BE2BCB2CB5F68E00FF863D /* MKCoordinateRegion+Extensions.swift in Sources */,
+				F6BE2BE62CB9CFB000FF863D /* SectionOverlay.swift in Sources */,
 				F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */,
 				F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */,
-				F6BE2BC72CB3109D00FF863D /* RoadInfoModalView.swift in Sources */,
+				F6BE2BE22CB8BD9900FF863D /* CLLocationCoordinate2D.swift in Sources */,
+				F6BE2BD22CB600DD00FF863D /* CleaningDatesFetcher.swift in Sources */,
+				F6479A062CBC4B4B00FA7705 /* RoadMapView.swift in Sources */,
+				F6BE2BE02CB8BD1A00FF863D /* SectionInfoModalView.swift in Sources */,
 				F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */,
 				F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
+				F6479A042CBC4B3600FA7705 /* RoadContentView.swift in Sources */,
 				F6BE2B872CACE89B00FF863D /* LocationManager.swift in Sources */,
 				F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */,
+				F6BE2BE42CB8C64700FF863D /* ShareSheet.swift in Sources */,
 				F6BE2B8B2CACEAD200FF863D /* ZoomControls.swift in Sources */,
 				F6BE2BAC2CB1C76000FF863D /* MKCoordinateRegion.swift in Sources */,
 			);
