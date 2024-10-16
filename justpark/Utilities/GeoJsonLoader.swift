@@ -1,9 +1,40 @@
-// Utilities/GeoJSONLoader.swift
+// GeoJSONLoader.swift
 
 import Foundation
 import MapKit
 
 struct GeoJSONLoader {
+    static func loadAllSections() -> (overlays: [MKOverlay], annotations: [MKAnnotation], sections: [Section]) {
+        var overlays: [MKOverlay] = []
+        var annotations: [MKAnnotation] = []
+        var sections: [Section] = []
+
+        // Assuming all your ward folders are in the main bundle's resource path
+        let wards = ["ward_44"] // Add other ward folder names as needed
+
+        for ward in wards {
+            // Get all GeoJSON files in the ward directory
+            if let wardURL = Bundle.main.resourceURL?.appendingPathComponent(ward) {
+                do {
+                    let fileURLs = try FileManager.default.contentsOfDirectory(at: wardURL, includingPropertiesForKeys: nil)
+                    for fileURL in fileURLs where fileURL.pathExtension == "geojson" {
+                        let fileName = fileURL.deletingPathExtension().lastPathComponent
+                        let result = loadSectionGeoJSONData(fileName: fileName, inSubdirectory: ward)
+                        overlays.append(contentsOf: result.overlays)
+                        annotations.append(contentsOf: result.annotations)
+                        if let section = result.section {
+                            sections.append(section)
+                        }
+                    }
+                } catch {
+                    print("Error reading contents of ward directory: \(error)")
+                }
+            }
+        }
+
+        return (overlays, annotations, sections)
+    }
+
     static func loadSectionGeoJSONData(fileName: String, inSubdirectory subdirectory: String? = nil) -> (overlays: [MKOverlay], annotations: [MKAnnotation], section: Section?) {
         var overlays: [MKOverlay] = []
         var annotations: [MKAnnotation] = []
@@ -35,40 +66,98 @@ struct GeoJSONLoader {
                let hood = json["hood"] as? String,
                let featuresArray = json["features"] as? [[String: Any]] {
 
-                print("Found \(featuresArray.count) features in GeoJSON.")
+                print("Found \(featuresArray.count) features in \(fileName).geojson.")
 
-                var coordinates: [CLLocationCoordinate2D] = []
+                // Create the Section with hood
+                let newSection = Section(ward: ward, sectionNumber: sectionNumber, hood: hood)
+
+                var sectionOverlays: [MKOverlay] = []
 
                 for (index, featureDict) in featuresArray.enumerated() {
                     if let geometry = featureDict["geometry"] as? [String: Any],
-                       let geometryType = geometry["type"] as? String,
-                       geometryType == "LineString",
-                       let coordinatesArray = geometry["coordinates"] as? [[Double]] {
+                       let geometryType = geometry["type"] as? String {
 
-                        // Convert coordinates to CLLocationCoordinate2D and append
-                        let lineCoordinates = coordinatesArray.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
-                        coordinates.append(contentsOf: lineCoordinates)
+                        if geometryType == "Polygon",
+                           let coordinatesArray = geometry["coordinates"] as? [[[Double]]] {
+
+                            // The first coordinateSet is the outer ring
+                            let exteriorCoordsSet = coordinatesArray.first
+                            let interiorCoordsSets = coordinatesArray.dropFirst()
+
+                            if let exteriorCoordsSet = exteriorCoordsSet {
+                                // Reverse the coordinates to ensure counter-clockwise order
+                                let exteriorCoords = Array(exteriorCoordsSet.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }.reversed())
+
+                                var interiorPolygons: [MKPolygon] = []
+
+                                for interiorCoordsSet in interiorCoordsSets {
+                                    // Reverse the coordinates to ensure clockwise order for holes
+                                    let interiorCoords = interiorCoordsSet.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
+                                    let interiorPolygon = MKPolygon(coordinates: interiorCoords, count: interiorCoords.count)
+                                    interiorPolygons.append(interiorPolygon)
+                                }
+
+                                let polygon = SectionPolygon(coordinates: exteriorCoords, count: exteriorCoords.count, interiorPolygons: interiorPolygons)
+                                polygon.section = newSection
+                                sectionOverlays.append(polygon)
+                            }
+                        } else if geometryType == "MultiPolygon",
+                                  let coordinatesArray = geometry["coordinates"] as? [[[[Double]]]] {
+
+                            // Handle MultiPolygon
+                            for polygonCoordsArray in coordinatesArray {
+                                // Each polygonCoordsArray represents a polygon (with possible interior rings)
+                                let exteriorCoordsSet = polygonCoordsArray.first
+                                let interiorCoordsSets = polygonCoordsArray.dropFirst()
+
+                                if let exteriorCoordsSet = exteriorCoordsSet {
+                                    // Reverse the coordinates to ensure counter-clockwise order
+                                    let exteriorCoords = Array(exteriorCoordsSet.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }.reversed())
+
+                                    var interiorPolygons: [MKPolygon] = []
+
+                                    for interiorCoordsSet in interiorCoordsSets {
+                                        // Reverse the coordinates to ensure clockwise order for holes
+                                        let interiorCoords = interiorCoordsSet.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
+                                        let interiorPolygon = MKPolygon(coordinates: interiorCoords, count: interiorCoords.count)
+                                        interiorPolygons.append(interiorPolygon)
+                                    }
+
+                                    let polygon = SectionPolygon(coordinates: exteriorCoords, count: exteriorCoords.count, interiorPolygons: interiorPolygons)
+                                    polygon.section = newSection
+                                    sectionOverlays.append(polygon)
+                                }
+                            }
+                        } else if geometryType == "LineString",
+                                  let coordinatesArray = geometry["coordinates"] as? [[Double]] {
+                            let coordinates = coordinatesArray.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
+                            // Check if LineString is a closed loop (first coordinate == last coordinate)
+                            if coordinates.first == coordinates.last && coordinates.count >= 4 {
+                                // Reverse the coordinates to ensure counter-clockwise order
+                                let reversedCoords = Array(coordinates.reversed())
+                                // It's a closed loop, create a polygon
+                                let polygon = SectionPolygon(coordinates: reversedCoords, count: reversedCoords.count)
+                                polygon.section = newSection
+                                sectionOverlays.append(polygon)
+                            } else {
+                                // Not a closed loop, create a polyline
+                                let polyline = SectionPolyline(coordinates: coordinates, count: coordinates.count)
+                                polyline.section = newSection
+                                sectionOverlays.append(polyline)
+                            }
+                        } else {
+                            print("Unsupported geometry type: \(geometryType)")
+                        }
                     } else {
                         print("Feature at index \(index) is missing required properties.")
                     }
                 }
 
-                if !coordinates.isEmpty {
-                    // Close the polygon by adding the first coordinate at the end if necessary
-                    if coordinates.first != coordinates.last {
-                        coordinates.append(coordinates.first!)
-                    }
-
-                    // Create the polygon
-                    let polygon = SectionOverlay(coordinates: coordinates, count: coordinates.count)
-                    // Create the Section with hood
-                    let newSection = Section(ward: ward, sectionNumber: sectionNumber, hood: hood)
-                    newSection.polygon = polygon
-                    polygon.section = newSection // Set the section reference
+                if !sectionOverlays.isEmpty {
+                    // Add overlays to the section
+                    overlays.append(contentsOf: sectionOverlays)
+                    newSection.overlays = sectionOverlays // Store all overlays for this section
                     section = newSection
-                    polygon.title = "SectionOverlay"
-
-                    overlays.append(polygon)
                 }
 
             } else {
@@ -80,68 +169,4 @@ struct GeoJSONLoader {
 
         return (overlays, annotations, section)
     }
-    
-    static func loadRoadGeoJSONData(fileName: String, inSubdirectory subdirectory: String? = nil) -> (overlays: [MKOverlay], annotations: [MKAnnotation]) {
-            var overlays: [MKOverlay] = []
-            var annotations: [MKAnnotation] = []
-
-            let bundle = Bundle.main
-            let url: URL?
-
-            if let subdirectory = subdirectory {
-                url = bundle.url(forResource: fileName, withExtension: "geojson", subdirectory: subdirectory)
-            } else {
-                url = bundle.url(forResource: fileName, withExtension: "geojson")
-            }
-
-            guard let geoJSONURL = url else {
-                if let subdirectory = subdirectory {
-                    print("Could not find \(subdirectory)/\(fileName).geojson")
-                } else {
-                    print("Could not find \(fileName).geojson")
-                }
-                return (overlays, annotations)
-            }
-
-            do {
-                let data = try Data(contentsOf: geoJSONURL)
-                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let featuresArray = json["features"] as? [[String: Any]] {
-
-                    print("Found \(featuresArray.count) road features in GeoJSON.")
-
-                    for (index, featureDict) in featuresArray.enumerated() {
-                        if let properties = featureDict["properties"] as? [String: Any],
-                           let id = properties["id"] as? Int,
-                           let name = properties["name"] as? String,
-                           let geometry = featureDict["geometry"] as? [String: Any],
-                           let geometryType = geometry["type"] as? String,
-                           geometryType == "LineString",
-                           let coordinatesArray = geometry["coordinates"] as? [[Double]] {
-
-                            // Convert coordinates to CLLocationCoordinate2D
-                            let lineCoordinates = coordinatesArray.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
-
-                            // Create the Road object
-                            let road = Road(id: id, name: name)
-
-                            // Create the RoadOverlay
-                            let polyline = RoadOverlay(coordinates: lineCoordinates, count: lineCoordinates.count)
-                            polyline.road = road
-
-                            // Add to overlays
-                            overlays.append(polyline)
-                        } else {
-                            print("Road feature at index \(index) is missing required properties.")
-                        }
-                    }
-                } else {
-                    print("Error parsing road GeoJSON data.")
-                }
-            } catch {
-                print("Error loading road GeoJSON data: \(error)")
-            }
-
-            return (overlays, annotations)
-        }
 }

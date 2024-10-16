@@ -1,4 +1,4 @@
-// Models/Section.swift
+// Section.swift
 
 import Foundation
 import MapKit
@@ -7,14 +7,14 @@ class Section: Identifiable, ObservableObject {
     let id = UUID()
     let ward: Int
     let sectionNumber: Int
-    let hood: String  // Already added hood property
+    let hood: String
     @Published var cleaningDates: [Date] = []
-    var polygon: MKPolygon?
+    var overlays: [MKOverlay] = [] // Store all overlays (polygons and polylines) for this section
 
     init(ward: Int, sectionNumber: Int, hood: String) {
         self.ward = ward
         self.sectionNumber = sectionNumber
-        self.hood = hood  // Initialize hood
+        self.hood = hood
     }
 
     func nextCleaningDates() -> [Date] {
@@ -28,7 +28,6 @@ class Section: Identifiable, ObservableObject {
         return Array(relevantDates.prefix(2))
     }
 
-    // Added function to get days until next cleaning date
     func daysUntilNextCleaning() -> Int? {
         let today = Date()
         if let nextDate = nextCleaningDates().first {

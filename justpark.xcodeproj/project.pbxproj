@@ -10,6 +10,10 @@
 		F6479A042CBC4B3600FA7705 /* RoadContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A032CBC4B2E00FA7705 /* RoadContentView.swift */; };
 		F6479A062CBC4B4B00FA7705 /* RoadMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A052CBC4B4800FA7705 /* RoadMapView.swift */; };
 		F6479A082CBC4B6100FA7705 /* RoadMapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A072CBC4B5C00FA7705 /* RoadMapViewCoordinator.swift */; };
+		F6479A0A2CBC589100FA7705 /* SectionPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A092CBC588E00FA7705 /* SectionPolygon.swift */; };
+		F6479A0C2CBF386000FA7705 /* SectionOverlayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A0B2CBF385100FA7705 /* SectionOverlayProtocol.swift */; };
+		F6479A0E2CBF387600FA7705 /* SectionPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A0D2CBF387200FA7705 /* SectionPolyline.swift */; };
+		F6479A102CBF396600FA7705 /* GeoJsonLoaderRoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A0F2CBF395E00FA7705 /* GeoJsonLoaderRoad.swift */; };
 		F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B782CACE7C400FF863D /* justparkApp.swift */; };
 		F6BE2B7B2CACE7C400FF863D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B7A2CACE7C400FF863D /* ContentView.swift */; };
 		F6BE2B7D2CACE7C500FF863D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */; };
@@ -36,13 +40,16 @@
 		F6BE2BE02CB8BD1A00FF863D /* SectionInfoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BDF2CB8BD1A00FF863D /* SectionInfoModalView.swift */; };
 		F6BE2BE22CB8BD9900FF863D /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BE12CB8BD9900FF863D /* CLLocationCoordinate2D.swift */; };
 		F6BE2BE42CB8C64700FF863D /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BE32CB8C64700FF863D /* ShareSheet.swift */; };
-		F6BE2BE62CB9CFB000FF863D /* SectionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BE52CB9CFB000FF863D /* SectionOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F6479A032CBC4B2E00FA7705 /* RoadContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadContentView.swift; sourceTree = "<group>"; };
 		F6479A052CBC4B4800FA7705 /* RoadMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadMapView.swift; sourceTree = "<group>"; };
 		F6479A072CBC4B5C00FA7705 /* RoadMapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadMapViewCoordinator.swift; sourceTree = "<group>"; };
+		F6479A092CBC588E00FA7705 /* SectionPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPolygon.swift; sourceTree = "<group>"; };
+		F6479A0B2CBF385100FA7705 /* SectionOverlayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOverlayProtocol.swift; sourceTree = "<group>"; };
+		F6479A0D2CBF387200FA7705 /* SectionPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPolyline.swift; sourceTree = "<group>"; };
+		F6479A0F2CBF395E00FA7705 /* GeoJsonLoaderRoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonLoaderRoad.swift; sourceTree = "<group>"; };
 		F6BE2B752CACE7C400FF863D /* justpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = justpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6BE2B782CACE7C400FF863D /* justparkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = justparkApp.swift; sourceTree = "<group>"; };
 		F6BE2B7A2CACE7C400FF863D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,7 +78,6 @@
 		F6BE2BDF2CB8BD1A00FF863D /* SectionInfoModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfoModalView.swift; sourceTree = "<group>"; };
 		F6BE2BE12CB8BD9900FF863D /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
 		F6BE2BE32CB8C64700FF863D /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
-		F6BE2BE52CB9CFB000FF863D /* SectionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,10 +140,12 @@
 		F6BE2BA12CB1C2A200FF863D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F6479A0D2CBF387200FA7705 /* SectionPolyline.swift */,
+				F6479A0B2CBF385100FA7705 /* SectionOverlayProtocol.swift */,
+				F6479A092CBC588E00FA7705 /* SectionPolygon.swift */,
 				F6BE2B8E2CACEF1300FF863D /* Road.swift */,
 				F6BE2B992CACFCE300FF863D /* RoadAnnotation.swift */,
 				F6BE2BDD2CB8BCCF00FF863D /* Section.swift */,
-				F6BE2BE52CB9CFB000FF863D /* SectionOverlay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -180,6 +188,7 @@
 		F6BE2BA52CB1C2C700FF863D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F6479A0F2CBF395E00FA7705 /* GeoJsonLoaderRoad.swift */,
 				F6BE2BA72CB1C60500FF863D /* GeoJsonLoader.swift */,
 				F6BE2BD12CB600DD00FF863D /* CleaningDatesFetcher.swift */,
 				F6BE2BE32CB8C64700FF863D /* ShareSheet.swift */,
@@ -282,18 +291,21 @@
 				F6BE2B7B2CACE7C400FF863D /* ContentView.swift in Sources */,
 				F6BE2B892CACEAB000FF863D /* MapView.swift in Sources */,
 				F6BE2BC92CB5F65F00FF863D /* MapViewCoordinator.swift in Sources */,
+				F6479A0A2CBC589100FA7705 /* SectionPolygon.swift in Sources */,
 				F6479A082CBC4B6100FA7705 /* RoadMapViewCoordinator.swift in Sources */,
 				F6BE2BB92CB1D01900FF863D /* HomeView.swift in Sources */,
 				F6BE2BCB2CB5F68E00FF863D /* MKCoordinateRegion+Extensions.swift in Sources */,
-				F6BE2BE62CB9CFB000FF863D /* SectionOverlay.swift in Sources */,
 				F6BE2B9A2CACFCE300FF863D /* RoadAnnotation.swift in Sources */,
 				F6BE2BA82CB1C60500FF863D /* GeoJsonLoader.swift in Sources */,
+				F6479A102CBF396600FA7705 /* GeoJsonLoaderRoad.swift in Sources */,
+				F6479A0E2CBF387600FA7705 /* SectionPolyline.swift in Sources */,
 				F6BE2BE22CB8BD9900FF863D /* CLLocationCoordinate2D.swift in Sources */,
 				F6BE2BD22CB600DD00FF863D /* CleaningDatesFetcher.swift in Sources */,
 				F6479A062CBC4B4B00FA7705 /* RoadMapView.swift in Sources */,
 				F6BE2BE02CB8BD1A00FF863D /* SectionInfoModalView.swift in Sources */,
 				F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */,
 				F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */,
+				F6479A0C2CBF386000FA7705 /* SectionOverlayProtocol.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
 				F6479A042CBC4B3600FA7705 /* RoadContentView.swift in Sources */,
 				F6BE2B872CACE89B00FF863D /* LocationManager.swift in Sources */,
