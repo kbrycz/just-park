@@ -90,8 +90,8 @@ struct ContentView: View {
             var sampleDates: [Date] = []
 
             // Add dates for testing
-            if let dateIn2Days = calendar.date(byAdding: .day, value: 2, to: today),
-               let dateIn5Days = calendar.date(byAdding: .day, value: 5, to: today),
+            if let dateIn2Days = calendar.date(byAdding: .day, value: 10, to: today),
+               let dateIn5Days = calendar.date(byAdding: .day, value: 11, to: today),
                let dateIn10Days = calendar.date(byAdding: .day, value: 10, to: today) {
                 sampleDates.append(contentsOf: [dateIn2Days, dateIn5Days, dateIn10Days])
             }

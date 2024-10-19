@@ -69,7 +69,7 @@ struct SectionInfoModalView: View {
                     .frame(height: 30) // Added more space before the buttons
                 
                 // Description
-                Text("Different sides of the street will have different cleaning dates. Often the odd-number addresses (usually west/north) will be cleaned first.")
+                Text("Different sides of the street will have different cleaning dates. Often the odd-number addresses (usually south/east) will be cleaned first.")
                     .font(.custom("Quicksand-Regular", size: 10))
                     .lineSpacing(5)
                     .foregroundColor(.gray)
