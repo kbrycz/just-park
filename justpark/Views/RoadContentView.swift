@@ -36,7 +36,7 @@ struct RoadContentView: View {
         .onAppear {
             // Load the GeoJSON data for roads
             DispatchQueue.global(qos: .userInitiated).async {
-                let result = GeoJSONLoaderRoad.loadRoadGeoJSONData(fileName: "section_3", inSubdirectory: "ward_44")
+                let result = GeoJSONLoaderRoad.loadRoadGeoJSONData(fileName: "section_1", inSubdirectory: "ward_44")
                 DispatchQueue.main.async {
                     roadOverlays = result.overlays
                     roadAnnotations = result.annotations
