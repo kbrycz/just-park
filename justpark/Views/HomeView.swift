@@ -24,18 +24,17 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Background image with stronger tint and blur
+                // Background image with tint and blur
                 Image("background")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-                    .overlay(
-                        Color.customBackground.opacity(0.8) // Stronger tint
-                    )
-                    .blur(radius: 6) // Slightly stronger blur
+                    .overlay(Color.customBackground.opacity(0.8))
+                    .blur(radius: 6)
 
+                // Top Content: Title, Subtitle, Logo
                 VStack(spacing: 20) {
-                    Spacer().frame(height: 40) // Top spacing
+                    Spacer().frame(height: 20)
 
                     Text("Road One")
                         .font(.custom("Quicksand-Bold", size: 40))
@@ -44,44 +43,72 @@ struct HomeView: View {
                     Text("Chicago Street Cleaning")
                         .font(.custom("Quicksand-Medium", size: 20))
                         .foregroundColor(.customText)
-                        .padding(.bottom, 20)
 
                     Image("logo")
                         .resizable()
                         .scaledToFit()
-                        .frame(maxWidth: 200)
-                        .padding(.horizontal, 40)
+                        .frame(maxWidth: 250)
                         .padding(.bottom, 30)
 
-                    // Use a fixed width for the buttons (80% of screen width)
+                    Spacer()
+                }
+
+                // Bottom Buttons: Anchored towards the bottom
+                VStack(spacing: 15) {
                     let buttonWidth = UIScreen.main.bounds.width * 0.8
 
-                    // Street Cleaning Button
                     NavigationLink(destination: ContentView()) {
                         Text("Street Cleaning")
                             .font(.custom("Quicksand-Medium", size: 18))
                             .foregroundColor(.customBackground)
                             .padding()
-                            .frame(width: buttonWidth)   // Fixed width
+                            .frame(width: buttonWidth)
                             .background(Color.customText)
                             .cornerRadius(10)
                             .shadow(radius: 5)
                     }
 
-                    // Settings Button
                     NavigationLink(destination: SettingsView()) {
                         Text("Settings")
                             .font(.custom("Quicksand-Medium", size: 18))
                             .foregroundColor(.customText)
                             .padding()
-                            .frame(width: buttonWidth)   // Fixed width
+                            .frame(width: buttonWidth)
                             .background(Color.buttonGray)
                             .cornerRadius(10)
                             .shadow(radius: 5)
                     }
 
+                    // Dummy links for Terms of Service and Privacy Policy,
+                    // non-clickable text separated from clickable bold terms.
+                    HStack(spacing: 5) {
+                        Text("View our")
+                            .font(.custom("Quicksand-Regular", size: 12))
+                            .foregroundColor(Color.white.opacity(0.5))
+
+                        Button(action: {}) {
+                            Text("Terms of Service")
+                                .font(.custom("Quicksand-Regular", size: 12))
+                                .bold()
+                                .foregroundColor(Color.white.opacity(0.5))
+                        }
+
+                        Text("and")
+                            .font(.custom("Quicksand-Regular", size: 12))
+                            .foregroundColor(Color.white.opacity(0.5))
+
+                        Button(action: {}) {
+                            Text("Privacy Policy")
+                                .font(.custom("Quicksand-Regular", size: 12))
+                                .bold()
+                                .foregroundColor(Color.white.opacity(0.5))
+                        }
+                    }
+                    .padding(.top, 10)
+
                     Spacer().frame(height: 50)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
