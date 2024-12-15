@@ -1,5 +1,3 @@
-// Views/HomeView.swift
-
 import SwiftUI
 
 struct HomeView: View {
@@ -16,65 +14,75 @@ struct HomeView: View {
             .font: UIFont(name: "Quicksand-Bold", size: 34)!,
             .foregroundColor: UIColor(Color.customText)
         ]
-        
+
         UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance // For iPhone small navigation bar in landscape
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance // For large title navigation bar
-        UINavigationBar.appearance().tintColor = UIColor(Color.customText) // For back button and other bar button items
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().tintColor = UIColor(Color.customText)
     }
 
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Just Park")
-                    .font(.custom("Quicksand-Bold", size: 40))
-                    .foregroundColor(.customText)
-                    .padding(.top, 40)
-                    .padding(.bottom, 5)
-
-                Text("Chicago Edition")
-                    .font(.custom("Quicksand-Medium", size: 20))
-                    .foregroundColor(.customText)
-
-                Spacer()
-
-                Image("logo") // Replace with your image asset name
+            ZStack {
+                // Background image with stronger tint and blur
+                Image("background")
                     .resizable()
-                    .scaledToFit()
-                    .padding(.horizontal)
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .overlay(
+                        Color.customBackground.opacity(0.8) // Stronger tint
+                    )
+                    .blur(radius: 6) // Slightly stronger blur
 
-                Spacer()
+                VStack(spacing: 20) {
+                    Spacer().frame(height: 40) // Top spacing
 
-                // Street Cleaning Button
-                NavigationLink(destination: ContentView()) {
-                    Text("Street Cleaning")
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.customText)
-                        .foregroundColor(.customBackground)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-                        .font(.custom("Quicksand-Medium", size: 18))
-                }
-                .padding(.horizontal, 20)
-
-                // Free Parking Button (currently does nothing)
-                Button(action: {
-                    // Future implementation for Free Parking
-                }) {
-                    Text("Free Parking")
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.buttonGray)
+                    Text("Road One")
+                        .font(.custom("Quicksand-Bold", size: 40))
                         .foregroundColor(.customText)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-                        .font(.custom("Quicksand-Medium", size: 18))
+
+                    Text("Chicago Street Cleaning")
+                        .font(.custom("Quicksand-Medium", size: 20))
+                        .foregroundColor(.customText)
+                        .padding(.bottom, 20)
+
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 200)
+                        .padding(.horizontal, 40)
+                        .padding(.bottom, 30)
+
+                    // Use a fixed width for the buttons (80% of screen width)
+                    let buttonWidth = UIScreen.main.bounds.width * 0.8
+
+                    // Street Cleaning Button
+                    NavigationLink(destination: ContentView()) {
+                        Text("Street Cleaning")
+                            .font(.custom("Quicksand-Medium", size: 18))
+                            .foregroundColor(.customBackground)
+                            .padding()
+                            .frame(width: buttonWidth)   // Fixed width
+                            .background(Color.customText)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                    }
+
+                    // Settings Button
+                    NavigationLink(destination: SettingsView()) {
+                        Text("Settings")
+                            .font(.custom("Quicksand-Medium", size: 18))
+                            .foregroundColor(.customText)
+                            .padding()
+                            .frame(width: buttonWidth)   // Fixed width
+                            .background(Color.buttonGray)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                    }
+
+                    Spacer().frame(height: 50)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 20)
             }
-            .background(Color.customBackground.edgesIgnoringSafeArea(.all))
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(Color.customText)

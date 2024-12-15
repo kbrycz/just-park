@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var sections: [Section] = []
     @State private var selectedSection: Section?
     @State private var isLoading = true
+    @State private var showInfoModal = false
 
     var body: some View {
         ZStack {
@@ -37,18 +38,24 @@ struct ContentView: View {
 
             if isModalPresented, let section = selectedSection {
                 SectionInfoModalView(section: section, isPresented: $isModalPresented)
+                    .id(section.id)
             }
+
         }
         .navigationBarTitle("Street Cleaning", displayMode: .inline)
+        // In the body or after your other modifiers:
         .navigationBarItems(trailing:
             Button(action: {
-                // Future implementation for Info button
+                showInfoModal = true
             }) {
                 Image(systemName: "info.circle")
                     .imageScale(.large)
-                    .foregroundColor(Color.primary)
+                    .foregroundColor(Color.customText)
             }
         )
+        .sheet(isPresented: $showInfoModal) {
+            InfoModalView()
+        }
         .onAppear {
             // Load all sections
             DispatchQueue.global(qos: .userInitiated).async {
@@ -87,22 +94,29 @@ struct ContentView: View {
         let today = Date()
 
         for section in sections {
-            var sampleDates: [Date] = []
-
-            // Add dates for testing
-            if let dateIn2Days = calendar.date(byAdding: .day, value: 10, to: today),
-               let dateIn5Days = calendar.date(byAdding: .day, value: 11, to: today),
-               let dateIn10Days = calendar.date(byAdding: .day, value: 10, to: today) {
-                sampleDates.append(contentsOf: [dateIn2Days, dateIn5Days, dateIn10Days])
+            // Generate a random number between 1 and 13 for the first cleaning date.
+            // That way we can have a second cleaning date the next day without exceeding 14 days out.
+            let randomDaysOffset = Int.random(in: 1...13)
+            
+            guard let firstDate = calendar.date(byAdding: .day, value: randomDaysOffset, to: today),
+                  let secondDate = calendar.date(byAdding: .day, value: 1, to: firstDate) else {
+                // In case of any unexpected date calculation failure, continue to next section.
+                continue
             }
 
-            section.cleaningDates = sampleDates
-            print("Assigned sample cleaning dates to section \(section.sectionNumber).")
+            // Assign these two consecutive dates to the section
+            section.cleaningDates = [firstDate, secondDate]
+
+            print("Assigned random cleaning dates to section \(section.sectionNumber):")
+            print(" - \(firstDate)")
+            print(" - \(secondDate)")
         }
 
-        // Force the overlays to update
+        // Force the overlays to update so colors refresh according to the new random dates
         updateOverlays()
     }
+
+
 
     private func updateOverlays() {
         overlays = sections.flatMap { $0.overlays }

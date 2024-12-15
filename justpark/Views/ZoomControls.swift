@@ -4,26 +4,30 @@ import SwiftUI
 
 struct ZoomControls: View {
     @EnvironmentObject var locationManager: LocationManager
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        VStack(spacing: 8) {
-            Button(action: {
+        VStack(spacing: 10) {
+            zoomButton(iconName: "plus.magnifyingglass") {
                 locationManager.zoomIn()
-            }) {
-                Image(systemName: "plus.magnifyingglass")
-                    .padding()
-                    .background(Color.customBackground.opacity(0.7))
-                    .clipShape(Circle())
             }
 
-            Button(action: {
+            zoomButton(iconName: "minus.magnifyingglass") {
                 locationManager.zoomOut()
-            }) {
-                Image(systemName: "minus.magnifyingglass")
-                    .padding()
-                    .background(Color.customBackground.opacity(0.7))
-                    .clipShape(Circle())
             }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+    }
+
+    @ViewBuilder
+    private func zoomButton(iconName: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: iconName)
+                .font(.system(size: 18, weight: .regular))
+                .foregroundColor(.primary)
+                .padding(10)
+                .background(.thinMaterial, in: Circle()) // A subtle blurred background
         }
     }
 }
+

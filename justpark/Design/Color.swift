@@ -18,6 +18,7 @@ extension Color {
     }
 
     static let customBackground = Color(hex: "2f3640")
+    static let customBackgroundLighter = Color(hex: "4e5661")
     static let customBackgroundDarker = Color(hex: "282e36")
     static let customBackgroundDarkest = Color(hex: "21252c")
     static let customText = Color(red: 240 / 255, green: 240 / 255, blue: 234 / 255)

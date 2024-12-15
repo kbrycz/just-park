@@ -10,8 +10,22 @@ struct GeoJSONLoader {
         var sections: [Section] = []
 
         // Assuming all your ward folders are in the main bundle's resource path
-        let wards = ["ward_44"] // Add other ward folder names as needed
+        // Read ward toggles from UserDefaults
+        // If the key does not exist, default to true (i.e., load the ward by default).
+        func isWardEnabled(_ wardKey: String) -> Bool {
+            return UserDefaults.standard.object(forKey: wardKey) as? Bool ?? true
+        }
 
+        let allPossibleWards = ["ward_44", "ward_43", "ward_46", "ward_48", "ward_47", "ward_34", "ward_42", "ward_2", "ward_1", "ward_27"]
+        let enabledWards = allPossibleWards.filter { wardName in
+            // Convert something like "ward_43" to "ward_43_enabled" to check
+            let prefKey = "\(wardName)_enabled"
+            return isWardEnabled(prefKey)
+        }
+
+        let wards = enabledWards
+
+        
         for ward in wards {
             // Get all GeoJSON files in the ward directory
             if let wardURL = Bundle.main.resourceURL?.appendingPathComponent(ward) {

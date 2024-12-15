@@ -39,7 +39,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
                         renderer.fillColor = UIColor.red.withAlphaComponent(0.5)
                     } else if days <= 7 {
                         // Yellow color
-                        renderer.fillColor = UIColor.yellow.withAlphaComponent(0.5)
+                        renderer.fillColor = UIColor.orange.withAlphaComponent(0.5)
                     } else {
                         // Light grey color
                         renderer.fillColor = UIColor.lightGray.withAlphaComponent(0.3)
