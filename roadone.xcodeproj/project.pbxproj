@@ -14,6 +14,9 @@
 		F6479A0C2CBF386000FA7705 /* SectionOverlayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A0B2CBF385100FA7705 /* SectionOverlayProtocol.swift */; };
 		F6479A0E2CBF387600FA7705 /* SectionPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A0D2CBF387200FA7705 /* SectionPolyline.swift */; };
 		F6479A102CBF396600FA7705 /* GeoJsonLoaderRoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6479A0F2CBF395E00FA7705 /* GeoJsonLoaderRoad.swift */; };
+		F655C2442D0E7F08009B8FD0 /* ward_43 in Resources */ = {isa = PBXBuildFile; fileRef = F655C2432D0E7EEF009B8FD0 /* ward_43 */; };
+		F655C2462D0E9A42009B8FD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F655C2452D0E9A40009B8FD0 /* SettingsView.swift */; };
+		F655C2482D0E9D92009B8FD0 /* InfoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F655C2472D0E9D87009B8FD0 /* InfoModalView.swift */; };
 		F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B782CACE7C400FF863D /* justparkApp.swift */; };
 		F6BE2B7B2CACE7C400FF863D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B7A2CACE7C400FF863D /* ContentView.swift */; };
 		F6BE2B7D2CACE7C500FF863D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */; };
@@ -50,7 +53,10 @@
 		F6479A0B2CBF385100FA7705 /* SectionOverlayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOverlayProtocol.swift; sourceTree = "<group>"; };
 		F6479A0D2CBF387200FA7705 /* SectionPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPolyline.swift; sourceTree = "<group>"; };
 		F6479A0F2CBF395E00FA7705 /* GeoJsonLoaderRoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonLoaderRoad.swift; sourceTree = "<group>"; };
-		F6BE2B752CACE7C400FF863D /* justpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = justpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F655C2432D0E7EEF009B8FD0 /* ward_43 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ward_43; sourceTree = "<group>"; };
+		F655C2452D0E9A40009B8FD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F655C2472D0E9D87009B8FD0 /* InfoModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModalView.swift; sourceTree = "<group>"; };
+		F6BE2B752CACE7C400FF863D /* roadone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roadone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6BE2B782CACE7C400FF863D /* justparkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = justparkApp.swift; sourceTree = "<group>"; };
 		F6BE2B7A2CACE7C400FF863D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,7 +108,7 @@
 		F6BE2B762CACE7C400FF863D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F6BE2B752CACE7C400FF863D /* justpark.app */,
+				F6BE2B752CACE7C400FF863D /* roadone.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +159,8 @@
 		F6BE2BA22CB1C2AA00FF863D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F655C2472D0E9D87009B8FD0 /* InfoModalView.swift */,
+				F655C2452D0E9A40009B8FD0 /* SettingsView.swift */,
 				F6479A072CBC4B5C00FA7705 /* RoadMapViewCoordinator.swift */,
 				F6479A052CBC4B4800FA7705 /* RoadMapView.swift */,
 				F6479A032CBC4B2E00FA7705 /* RoadContentView.swift */,
@@ -199,6 +207,7 @@
 		F6BE2BA62CB1C2CD00FF863D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F655C2432D0E7EEF009B8FD0 /* ward_43 */,
 				F6BE2BDB2CB7287E00FF863D /* ward_44 */,
 			);
 			path = Resources;
@@ -215,9 +224,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F6BE2B742CACE7C400FF863D /* justpark */ = {
+		F6BE2B742CACE7C400FF863D /* roadone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F6BE2B832CACE7C500FF863D /* Build configuration list for PBXNativeTarget "justpark" */;
+			buildConfigurationList = F6BE2B832CACE7C500FF863D /* Build configuration list for PBXNativeTarget "roadone" */;
 			buildPhases = (
 				F6BE2B712CACE7C400FF863D /* Sources */,
 				F6BE2B722CACE7C400FF863D /* Frameworks */,
@@ -227,9 +236,9 @@
 			);
 			dependencies = (
 			);
-			name = justpark;
+			name = roadone;
 			productName = justpark;
-			productReference = F6BE2B752CACE7C400FF863D /* justpark.app */;
+			productReference = F6BE2B752CACE7C400FF863D /* roadone.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -247,7 +256,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F6BE2B702CACE7C400FF863D /* Build configuration list for PBXProject "justpark" */;
+			buildConfigurationList = F6BE2B702CACE7C400FF863D /* Build configuration list for PBXProject "roadone" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -260,7 +269,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F6BE2B742CACE7C400FF863D /* justpark */,
+				F6BE2B742CACE7C400FF863D /* roadone */,
 			);
 		};
 /* End PBXProject section */
@@ -273,6 +282,7 @@
 				F6BE2BDC2CB7287E00FF863D /* ward_44 in Resources */,
 				F6BE2BB42CB1CDB300FF863D /* Quicksand-Bold.ttf in Resources */,
 				F6BE2BAE2CB1CD2700FF863D /* logo.png in Resources */,
+				F655C2442D0E7F08009B8FD0 /* ward_43 in Resources */,
 				F6BE2B802CACE7C500FF863D /* Preview Assets.xcassets in Resources */,
 				F6BE2B7D2CACE7C500FF863D /* Assets.xcassets in Resources */,
 				F6BE2BB22CB1CDB300FF863D /* Quicksand-Regular.ttf in Resources */,
@@ -308,6 +318,8 @@
 				F6479A0C2CBF386000FA7705 /* SectionOverlayProtocol.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
 				F6479A042CBC4B3600FA7705 /* RoadContentView.swift in Sources */,
+				F655C2462D0E9A42009B8FD0 /* SettingsView.swift in Sources */,
+				F655C2482D0E9D92009B8FD0 /* InfoModalView.swift in Sources */,
 				F6BE2B872CACE89B00FF863D /* LocationManager.swift in Sources */,
 				F6BE2B9E2CACFE6F00FF863D /* MKMapView+Extensions.swift in Sources */,
 				F6BE2BE42CB8C64700FF863D /* ShareSheet.swift in Sources */,
@@ -450,6 +462,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = justpark/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Road One";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show where you are on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -461,7 +474,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kbapps.justpark;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kbapps.roadone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -481,6 +494,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = justpark/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Road One";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show where you are on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -492,7 +506,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kbapps.justpark;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kbapps.roadone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -503,7 +517,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F6BE2B702CACE7C400FF863D /* Build configuration list for PBXProject "justpark" */ = {
+		F6BE2B702CACE7C400FF863D /* Build configuration list for PBXProject "roadone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F6BE2B812CACE7C500FF863D /* Debug */,
@@ -512,7 +526,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F6BE2B832CACE7C500FF863D /* Build configuration list for PBXNativeTarget "justpark" */ = {
+		F6BE2B832CACE7C500FF863D /* Build configuration list for PBXNativeTarget "roadone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F6BE2B842CACE7C500FF863D /* Debug */,
