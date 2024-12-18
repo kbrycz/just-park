@@ -1,9 +1,9 @@
-// justparkApp.swift
+// roadoneApp.swift
 
 import SwiftUI
 
 @main
-struct justparkApp: App {
+struct roadoneApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()

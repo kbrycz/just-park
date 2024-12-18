@@ -17,7 +17,7 @@
 		F655C2442D0E7F08009B8FD0 /* ward_43 in Resources */ = {isa = PBXBuildFile; fileRef = F655C2432D0E7EEF009B8FD0 /* ward_43 */; };
 		F655C2462D0E9A42009B8FD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F655C2452D0E9A40009B8FD0 /* SettingsView.swift */; };
 		F655C2482D0E9D92009B8FD0 /* InfoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F655C2472D0E9D87009B8FD0 /* InfoModalView.swift */; };
-		F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B782CACE7C400FF863D /* justparkApp.swift */; };
+		F6BE2B792CACE7C400FF863D /* roadoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B782CACE7C400FF863D /* roadoneApp.swift */; };
 		F6BE2B7B2CACE7C400FF863D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2B7A2CACE7C400FF863D /* ContentView.swift */; };
 		F6BE2B7D2CACE7C500FF863D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */; };
 		F6BE2B802CACE7C500FF863D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6BE2B7F2CACE7C500FF863D /* Preview Assets.xcassets */; };
@@ -58,7 +58,7 @@
 		F655C2452D0E9A40009B8FD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F655C2472D0E9D87009B8FD0 /* InfoModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModalView.swift; sourceTree = "<group>"; };
 		F6BE2B752CACE7C400FF863D /* roadone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roadone.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6BE2B782CACE7C400FF863D /* justparkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = justparkApp.swift; sourceTree = "<group>"; };
+		F6BE2B782CACE7C400FF863D /* roadoneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roadoneApp.swift; sourceTree = "<group>"; };
 		F6BE2B7A2CACE7C400FF863D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F6BE2B7F2CACE7C500FF863D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 				F6BE2BA32CB1C2B700FF863D /* ViewModels */,
 				F6BE2BA22CB1C2AA00FF863D /* Views */,
 				F6BE2BA12CB1C2A200FF863D /* Models */,
-				F6BE2B782CACE7C400FF863D /* justparkApp.swift */,
+				F6BE2B782CACE7C400FF863D /* roadoneApp.swift */,
 				F6BE2B7C2CACE7C500FF863D /* Assets.xcassets */,
 				F6BE2BB12CB1CDB300FF863D /* Quicksand-Bold.ttf */,
 				F6BE2BB02CB1CDB300FF863D /* Quicksand-Medium.ttf */,
@@ -318,7 +318,7 @@
 				F6479A062CBC4B4B00FA7705 /* RoadMapView.swift in Sources */,
 				F6BE2BE02CB8BD1A00FF863D /* SectionInfoModalView.swift in Sources */,
 				F6BE2BB72CB1CE9500FF863D /* Color.swift in Sources */,
-				F6BE2B792CACE7C400FF863D /* justparkApp.swift in Sources */,
+				F6BE2B792CACE7C400FF863D /* roadoneApp.swift in Sources */,
 				F6479A0C2CBF386000FA7705 /* SectionOverlayProtocol.swift in Sources */,
 				F6BE2B8F2CACEF1300FF863D /* Road.swift in Sources */,
 				F6479A042CBC4B3600FA7705 /* RoadContentView.swift in Sources */,
@@ -461,11 +461,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"justpark/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"roadone/Preview Content\"";
 				DEVELOPMENT_TEAM = TW65Z2CGW7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = justpark/Info.plist;
+				INFOPLIST_FILE = roadone/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Road One";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show where you are on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -493,11 +493,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"justpark/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"roadone/Preview Content\"";
 				DEVELOPMENT_TEAM = TW65Z2CGW7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = justpark/Info.plist;
+				INFOPLIST_FILE = roadone/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Road One";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show where you are on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
