@@ -43,6 +43,7 @@
 		F6BE2BE02CB8BD1A00FF863D /* SectionInfoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BDF2CB8BD1A00FF863D /* SectionInfoModalView.swift */; };
 		F6BE2BE22CB8BD9900FF863D /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BE12CB8BD9900FF863D /* CLLocationCoordinate2D.swift */; };
 		F6BE2BE42CB8C64700FF863D /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE2BE32CB8C64700FF863D /* ShareSheet.swift */; };
+		F6F5665A2D1284BF001D7C1F /* kbLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = F6F566592D1284BF001D7C1F /* kbLogo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		F6BE2BDF2CB8BD1A00FF863D /* SectionInfoModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfoModalView.swift; sourceTree = "<group>"; };
 		F6BE2BE12CB8BD9900FF863D /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
 		F6BE2BE32CB8C64700FF863D /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		F6F566592D1284BF001D7C1F /* kbLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kbLogo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +102,7 @@
 		F6BE2B6C2CACE7C400FF863D = {
 			isa = PBXGroup;
 			children = (
-				F6BE2B772CACE7C400FF863D /* justpark */,
+				F6BE2B772CACE7C400FF863D /* roadone */,
 				F6BE2B762CACE7C400FF863D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,7 +115,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F6BE2B772CACE7C400FF863D /* justpark */ = {
+		F6BE2B772CACE7C400FF863D /* roadone */ = {
 			isa = PBXGroup;
 			children = (
 				F6BE2BBA2CB1D0B700FF863D /* Info.plist */,
@@ -130,9 +132,10 @@
 				F6BE2BB02CB1CDB300FF863D /* Quicksand-Medium.ttf */,
 				F6BE2BAF2CB1CDB300FF863D /* Quicksand-Regular.ttf */,
 				F6BE2BAD2CB1CD2700FF863D /* logo.png */,
+				F6F566592D1284BF001D7C1F /* kbLogo.png */,
 				F6BE2B7E2CACE7C500FF863D /* Preview Content */,
 			);
-			path = justpark;
+			path = roadone;
 			sourceTree = "<group>";
 		};
 		F6BE2B7E2CACE7C500FF863D /* Preview Content */ = {
@@ -279,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6F5665A2D1284BF001D7C1F /* kbLogo.png in Resources */,
 				F6BE2BDC2CB7287E00FF863D /* ward_44 in Resources */,
 				F6BE2BB42CB1CDB300FF863D /* Quicksand-Bold.ttf in Resources */,
 				F6BE2BAE2CB1CD2700FF863D /* logo.png in Resources */,
