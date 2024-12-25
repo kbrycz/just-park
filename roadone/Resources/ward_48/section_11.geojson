@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "ward": 48,
+  "section": 11,
+  "hood": "Uptown",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11,
+        "name": "Section 11 Boundary"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-87.661151, 41.972655],
+            [-87.659793, 41.972665],
+            [-87.659755, 41.971503],
+            [-87.661099, 41.971475],
+            [-87.661151, 41.972655]
+          ]
+        ]
+      }
+    }
+  ]
+}

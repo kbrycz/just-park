@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "ward": 48,
+  "section": 10,
+  "hood": "Edgewater",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 10,
+        "name": "Section 10 Boundary"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-87.670682, 41.998092],
+            [-87.663064, 41.998188],
+            [-87.662923, 41.994581],
+            [-87.666636, 41.994496],
+            [-87.670144, 41.994477],
+            [-87.670195, 41.996475],
+            [-87.670682, 41.998092]
+          ]
+        ]
+      }
+    }
+  ]
+}
