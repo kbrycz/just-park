@@ -8,10 +8,8 @@ struct SettingsView: View {
     @AppStorage("ward_46_enabled") private var ward46Enabled: Bool = true
     @AppStorage("ward_48_enabled") private var ward48Enabled: Bool = true
     @AppStorage("ward_47_enabled") private var ward47Enabled: Bool = true
-    @AppStorage("ward_34_enabled") private var ward34Enabled: Bool = true
     @AppStorage("ward_42_enabled") private var ward42Enabled: Bool = true
     @AppStorage("ward_2_enabled") private var ward2Enabled: Bool = true
-    @AppStorage("ward_1_enabled") private var ward1Enabled: Bool = true
     @AppStorage("ward_27_enabled") private var ward27Enabled: Bool = true
     @AppStorage("ward_32_enabled") private var ward32Enabled: Bool = true
 
@@ -72,17 +70,15 @@ Use this link to find your ward:
                             .padding(.bottom, 8)
 
                         // Ward toggles
-                        wardToggle("Ward 44", isOn: $ward44Enabled)
-                        wardToggle("Ward 43", isOn: $ward43Enabled)
-                        wardToggle("Ward 46", isOn: $ward46Enabled)
-                        wardToggle("Ward 48", isOn: $ward48Enabled)
-                        wardToggle("Ward 47", isOn: $ward47Enabled)
-                        wardToggle("Ward 34", isOn: $ward34Enabled)
-                        wardToggle("Ward 42", isOn: $ward42Enabled)
                         wardToggle("Ward 2", isOn: $ward2Enabled)
-                        wardToggle("Ward 1", isOn: $ward1Enabled)
                         wardToggle("Ward 27", isOn: $ward27Enabled)
                         wardToggle("Ward 32", isOn: $ward32Enabled)
+                        wardToggle("Ward 42", isOn: $ward42Enabled)
+                        wardToggle("Ward 43", isOn: $ward43Enabled)
+                        wardToggle("Ward 44", isOn: $ward44Enabled)
+                        wardToggle("Ward 46", isOn: $ward46Enabled)
+                        wardToggle("Ward 47", isOn: $ward47Enabled)
+                        wardToggle("Ward 48", isOn: $ward48Enabled)
 
                     }
                     .padding()
