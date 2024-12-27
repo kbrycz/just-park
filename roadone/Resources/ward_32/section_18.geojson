@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "ward": 32,
+  "section": 18,
+  "hood": "Bucktown",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18,
+        "name": "Section 18 Boundary"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-87.677665, 41.922080],
+            [-87.672751, 41.919062],
+            [-87.672558, 41.910583],
+            [-87.677493, 41.910471],
+            [-87.677583, 41.915635],
+            [-87.677665, 41.922080]
+          ]
+        ]
+      }
+    }
+  ]
+}

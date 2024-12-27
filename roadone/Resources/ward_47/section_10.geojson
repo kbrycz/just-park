@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "ward": 47,
+  "section": 10,
+  "hood": "Ravenswood",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 10,
+        "name": "Section 10 Boundary"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-87.683830, 41.961389],
+            [-87.678961, 41.961463],
+            [-87.678853, 41.957397],
+            [-87.678751, 41.954170],
+            [-87.683622, 41.954118],
+            [-87.683713, 41.957269],
+            [-87.683830, 41.961389]
+          ]
+        ]
+      }
+    }
+  ]
+}

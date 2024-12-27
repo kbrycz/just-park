@@ -13,6 +13,8 @@ struct SettingsView: View {
     @AppStorage("ward_2_enabled") private var ward2Enabled: Bool = true
     @AppStorage("ward_1_enabled") private var ward1Enabled: Bool = true
     @AppStorage("ward_27_enabled") private var ward27Enabled: Bool = true
+    @AppStorage("ward_32_enabled") private var ward32Enabled: Bool = true
+
 
     var body: some View {
         ZStack {
@@ -80,6 +82,8 @@ Use this link to find your ward:
                         wardToggle("Ward 2", isOn: $ward2Enabled)
                         wardToggle("Ward 1", isOn: $ward1Enabled)
                         wardToggle("Ward 27", isOn: $ward27Enabled)
+                        wardToggle("Ward 32", isOn: $ward32Enabled)
+
                     }
                     .padding()
                     .background(Color.black.opacity(0.2))

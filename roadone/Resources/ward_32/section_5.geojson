@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "ward": 32,
+  "section": 5,
+  "hood": "Roscoe Village",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5,
+        "name": "Section 5 Boundary"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-87.687998, 41.939528],
+            [-87.683278, 41.939496],
+            [-87.683149, 41.934164],
+            [-87.680699, 41.932262],
+            [-87.687930, 41.932199],
+            [-87.687973, 41.935966],
+            [-87.687998, 41.939528]
+          ]
+        ]
+      }
+    }
+  ]
+}

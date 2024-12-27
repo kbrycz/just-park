@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "ward": 32,
+  "section": 11,
+  "hood": "Lakeview",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11,
+        "name": "Section 11 Boundary"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-87.663555, 41.932470],
+            [-87.658727, 41.932566],
+            [-87.658469, 41.925318],
+            [-87.663361, 41.925302],
+            [-87.663555, 41.932470]
+          ]
+        ]
+      }
+    }
+  ]
+}
