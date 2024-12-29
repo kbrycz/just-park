@@ -16,7 +16,7 @@ struct GeoJSONLoader {
             return UserDefaults.standard.object(forKey: wardKey) as? Bool ?? true
         }
 
-        let allPossibleWards = ["ward_44", "ward_43", "ward_46", "ward_48", "ward_47", "ward_34", "ward_42", "ward_2", "ward_1", "ward_27", "ward_32"]
+        let allPossibleWards = ["ward_44", "ward_43", "ward_46", "ward_48", "ward_47", "ward_42", "ward_2", "ward_27", "ward_32"]
         let enabledWards = allPossibleWards.filter { wardName in
             // Convert something like "ward_43" to "ward_43_enabled" to check
             let prefKey = "\(wardName)_enabled"

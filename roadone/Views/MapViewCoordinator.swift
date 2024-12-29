@@ -26,8 +26,8 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         return MKOverlayRenderer()
     }
 
+    // Excerpt from MapViewCoordinator
     private func configurePolygonRenderer(_ renderer: MKPolygonRenderer, for overlay: MKOverlay) {
-        // Get the section associated with this overlay
         if let polygon = overlay as? SectionPolygon, let section = polygon.section {
             let nextDates = section.nextCleaningDates()
             if let nextDate = nextDates.first {
@@ -35,13 +35,10 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
                 let today = Date()
                 if let days = calendar.dateComponents([.day], from: today, to: nextDate).day {
                     if days <= 3 {
-                        // Red color
                         renderer.fillColor = UIColor.red.withAlphaComponent(0.5)
                     } else if days <= 7 {
-                        // Yellow color
                         renderer.fillColor = UIColor.orange.withAlphaComponent(0.5)
                     } else {
-                        // Light grey color
                         renderer.fillColor = UIColor.lightGray.withAlphaComponent(0.3)
                     }
                 } else {
@@ -49,19 +46,17 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
                     renderer.fillColor = UIColor.lightGray.withAlphaComponent(0.3)
                 }
             } else {
-                // Default color
+                // If no upcoming/past-within-a-week date
                 renderer.fillColor = UIColor.lightGray.withAlphaComponent(0.3)
             }
         } else {
-            // Default color
             renderer.fillColor = UIColor.lightGray.withAlphaComponent(0.3)
         }
-
+        
         renderer.strokeColor = UIColor.white.withAlphaComponent(0.5)
         renderer.lineWidth = 1.0
-
-        // Set usesEvenOddFillRule to true
     }
+
 
     private func configurePolylineRenderer(_ renderer: MKPolylineRenderer, for overlay: MKOverlay) {
         // Get the section associated with this overlay

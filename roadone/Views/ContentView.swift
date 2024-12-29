@@ -88,33 +88,49 @@ struct ContentView: View {
     }
 
     private func fetchCleaningDates() {
-        print("Fetching cleaning dates from API...")
+        print("Loading cleaning dates from local JSON...")
 
         let calendar = Calendar.current
         let today = Date()
 
         for section in sections {
-            // Generate a random number between 1 and 13 for the first cleaning date.
-            // That way we can have a second cleaning date the next day without exceeding 14 days out.
-            let randomDaysOffset = Int.random(in: 1...13)
-            
-            guard let firstDate = calendar.date(byAdding: .day, value: randomDaysOffset, to: today),
-                  let secondDate = calendar.date(byAdding: .day, value: 1, to: firstDate) else {
-                // In case of any unexpected date calculation failure, continue to next section.
-                continue
+            // Attempt to fetch the real list of dates from local JSON
+            if let actualDates = LocalCleaningDatesLoader.getDates(forWard: section.ward,
+                                                                  section: section.sectionNumber) {
+                // Sort is already done by loader, but let's confirm
+                let sortedDates = actualDates.sorted()
+
+                // Now filter so we keep:
+                // - Any date in the future
+                // - Or any date up to 7 days in the past from "today"
+                let validDates = sortedDates.filter {
+                    if $0 >= today {
+                        return true
+                    } else {
+                        // If it's in the past, keep only if within last 7 days
+                        if let diff = calendar.dateComponents([.day], from: $0, to: today).day,
+                           diff <= 7 {
+                            return true
+                        }
+                        return false
+                    }
+                }
+
+                // We'll store all validDates in the `section.cleaningDates`.
+                // Section logic (`nextCleaningDates()`) will handle showing the "next two".
+                section.cleaningDates = validDates
+
+                print("Assigned local cleaning dates to Ward \(section.ward) Section \(section.sectionNumber): \(validDates.count) valid dates.")
+            } else {
+                // If we didn't find a matching entry, just empty
+                section.cleaningDates = []
             }
-
-            // Assign these two consecutive dates to the section
-            section.cleaningDates = [firstDate, secondDate]
-
-            print("Assigned random cleaning dates to section \(section.sectionNumber):")
-            print(" - \(firstDate)")
-            print(" - \(secondDate)")
         }
 
-        // Force the overlays to update so colors refresh according to the new random dates
+        // Force the overlays to update so polygon colors refresh
         updateOverlays()
     }
+
 
 
 

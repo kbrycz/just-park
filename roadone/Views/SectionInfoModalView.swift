@@ -46,11 +46,12 @@ struct SectionInfoModalView: View {
                 let nextDates = section.nextCleaningDates()
 
                 if nextDates.isEmpty {
-                    Text("Unable to get upcoming cleaning dates.")
-                        .font(.custom("Quicksand-Medium", size: 16))
+                    Text("No more cleaning dates! Make sure your app is up to date if we are in the cleaning season (April-November). Schedules are updated every March!")
+                        .font(.custom("Quicksand-Medium", size: 13))
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal)
+                        .padding(.horizontal, 20)
+                        .lineSpacing(8)
                 } else {
 
                     // Cleaning Dates List

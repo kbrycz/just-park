@@ -14,7 +14,7 @@ class LocationManager: NSObject, ObservableObject {
         // Set an initial region if needed
         region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 41.936, longitude: -87.656),
-            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            span: MKCoordinateSpan(latitudeDelta: 0.125, longitudeDelta: 0.125)
         )
     }
 

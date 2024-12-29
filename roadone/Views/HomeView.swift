@@ -24,91 +24,101 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Background image with tint and blur
+                // Background image (blur + tint)
                 Image("background")
                     .resizable()
                     .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea(edges: [.all])
                     .overlay(Color.customBackground.opacity(0.8))
                     .blur(radius: 6)
 
-                // Top Content: Title, Subtitle, Logo
-                VStack(spacing: 20) {
-                    Spacer().frame(height: 20)
+                GeometryReader { geometry in
+                    let minDimension = min(geometry.size.width, geometry.size.height)
+                    let isPad = minDimension > 600
 
-                    Text("Road One")
-                        .font(.custom("Quicksand-Bold", size: 40))
-                        .foregroundColor(.customText)
+                    let titleFontSize: CGFloat = isPad ? 48 : 28
+                    let subTitleFontSize: CGFloat = isPad ? 24 : 16
+                    let buttonWidth = isPad
+                        ? minDimension * 0.6
+                        : minDimension * 0.7
+                    let maxContentWidth: CGFloat = isPad ? 1200 : .infinity
 
-                    Text("Chicago Street Cleaning")
-                        .font(.custom("Quicksand-Medium", size: 20))
-                        .foregroundColor(.customText)
+                    VStack(spacing: 10) {
+                        // Top Content: Title, Subtitle, and Logo
+                        Spacer()
+                        VStack(spacing: 10) {
+                            Text("Chicago Street Cleaning")
+                                .font(.custom("Quicksand-Bold", size: titleFontSize))
+                                .foregroundColor(.customText)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .minimumScaleFactor(0.8)
 
-                    Image("logo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 250)
-                        .padding(.bottom, 30)
+                            Text("Say goodbye to those parking tickets!")
+                                .font(.custom("Quicksand-Medium", size: subTitleFontSize))
+                                .foregroundColor(.customText)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .minimumScaleFactor(0.85)
 
-                    Spacer()
-                }
-
-                // Bottom Buttons: Anchored towards the bottom
-                VStack(spacing: 15) {
-                    let buttonWidth = UIScreen.main.bounds.width * 0.8
-
-                    NavigationLink(destination: ContentView()) {
-                        Text("Street Cleaning")
-                            .font(.custom("Quicksand-Medium", size: 18))
-                            .foregroundColor(.customBackground)
-                            .padding()
-                            .frame(width: buttonWidth)
-                            .background(Color.customText)
-                            .cornerRadius(10)
-                            .shadow(radius: 5)
-                    }
-
-                    NavigationLink(destination: SettingsView()) {
-                        Text("Settings")
-                            .font(.custom("Quicksand-Medium", size: 18))
-                            .foregroundColor(.customText)
-                            .padding()
-                            .frame(width: buttonWidth)
-                            .background(Color.buttonGray)
-                            .cornerRadius(10)
-                            .shadow(radius: 5)
-                    }
-
-                    // Dummy links for Terms of Service and Privacy Policy,
-                    // non-clickable text separated from clickable bold terms.
-                    HStack(spacing: 5) {
-                        Text("View our")
-                            .font(.custom("Quicksand-Regular", size: 12))
-                            .foregroundColor(Color.white.opacity(0.5))
-
-                        Button(action: {}) {
-                            Text("Terms of Service")
-                                .font(.custom("Quicksand-Regular", size: 12))
-                                .bold()
-                                .foregroundColor(Color.white.opacity(0.5))
+                            Image("logo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: isPad ? 500 : 250)
+                                .padding(.top, 20)
                         }
 
-                        Text("and")
-                            .font(.custom("Quicksand-Regular", size: 12))
-                            .foregroundColor(Color.white.opacity(0.5))
+                        Spacer()
 
-                        Button(action: {}) {
-                            Text("Privacy Policy")
-                                .font(.custom("Quicksand-Regular", size: 12))
-                                .bold()
-                                .foregroundColor(Color.white.opacity(0.5))
+                        // Bottom Content: Buttons and TOS
+                        VStack(spacing: 16) {
+                            NavigationLink(destination: ContentView()) {
+                                Text("Street Cleaning")
+                                    .font(.custom("Quicksand-Medium", size: subTitleFontSize))
+                                    .foregroundColor(.customBackground)
+                                    .padding()
+                                    .frame(width: buttonWidth)
+                                    .background(Color.customText)
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
+                            }
+
+                            NavigationLink(destination: SettingsView()) {
+                                Text("Settings")
+                                    .font(.custom("Quicksand-Medium", size: subTitleFontSize))
+                                    .foregroundColor(.customText)
+                                    .padding()
+                                    .frame(width: buttonWidth)
+                                    .background(Color.buttonGray)
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
+                            }
+
+                            HStack(spacing: 3) {
+                                Text("View our")
+                                    .font(.custom("Quicksand-Regular", size: isPad ? 14 : 12))
+                                    .foregroundColor(Color.white.opacity(0.5))
+
+                                Button(action: {
+                                    if let url = URL(string: "https://www.termsfeed.com/live/a3fa6538-8014-4a5e-b9db-246dfb527dfe") {
+                                        UIApplication.shared.open(url)
+                                    }
+                                }) {
+                                    Text("Privacy Policy")
+                                        .font(.custom("Quicksand-Regular", size: isPad ? 14 : 12))
+                                        .bold()
+                                        .foregroundColor(Color.white.opacity(0.5))
+                                }
+
+                            }
+                            .padding(.top, 8)
                         }
+                        .frame(maxWidth: maxContentWidth)
+                        .padding(.bottom, isPad ? 140 : 30)
                     }
-                    .padding(.top, 10)
-
-                    Spacer().frame(height: 50)
+                    .padding(.horizontal, 20)
+                    .frame(maxHeight: .infinity, alignment: .top) // Align top for the main content
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())

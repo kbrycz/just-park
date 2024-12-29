@@ -9,7 +9,7 @@ class Section: Identifiable, ObservableObject {
     let sectionNumber: Int
     let hood: String
     @Published var cleaningDates: [Date] = []
-    var overlays: [MKOverlay] = [] // Store all overlays (polygons and polylines) for this section
+    var overlays: [MKOverlay] = []
 
     init(ward: Int, sectionNumber: Int, hood: String) {
         self.ward = ward
@@ -21,21 +21,27 @@ class Section: Identifiable, ObservableObject {
         let today = Date()
         let calendar = Calendar.current
 
-        let relevantDates = cleaningDates.filter {
-            $0 >= today || (calendar.dateComponents([.day], from: $0, to: today).day ?? 0) <= 7
-        }.sorted()
-
-        return Array(relevantDates.prefix(2))
-    }
-
-    func daysUntilNextCleaning() -> Int? {
-        let today = Date()
-        if let nextDate = nextCleaningDates().first {
-            let calendar = Calendar.current
-            if let days = calendar.dateComponents([.day], from: today, to: nextDate).day {
-                return days
+        // 1. Filter to keep only those that are either in the future
+        //    or up to one week in the past
+        let relevant = cleaningDates.filter { date in
+            if date >= today {
+                return true
+            } else {
+                // If in the past, keep if within last 7 days
+                if let diff = calendar.dateComponents([.day], from: date, to: today).day,
+                   diff <= 7 {
+                    return true
+                }
+                return false
             }
         }
-        return nil
+
+        // 2. Sort ascending
+        let sorted = relevant.sorted()
+
+        // 3. Grab next 2
+        //    If they've all passed more than a week, it might be empty, but that's correct logic
+        let nextTwo = Array(sorted.prefix(2))
+        return nextTwo
     }
 }
