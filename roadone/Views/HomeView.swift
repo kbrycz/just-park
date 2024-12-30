@@ -43,6 +43,7 @@ struct HomeView: View {
                         : minDimension * 0.7
                     let maxContentWidth: CGFloat = isPad ? 1200 : .infinity
 
+
                     VStack(spacing: 10) {
                         // Top Content: Title, Subtitle, and Logo
                         Spacer()
@@ -60,18 +61,13 @@ struct HomeView: View {
                                 .multilineTextAlignment(.center)
                                 .lineLimit(nil)
                                 .minimumScaleFactor(0.85)
-
-                            Image("logo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(maxWidth: isPad ? 500 : 250)
-                                .padding(.top, 20)
                         }
 
                         Spacer()
 
                         // Bottom Content: Buttons and TOS
                         VStack(spacing: 16) {
+                        
                             NavigationLink(destination: ContentView()) {
                                 Text("Street Cleaning")
                                     .font(.custom("Quicksand-Medium", size: subTitleFontSize))
