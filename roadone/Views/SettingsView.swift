@@ -86,7 +86,7 @@ Use this link to find your ward:
                     .cornerRadius(10)
 
                     // Disclaimer with more line spacing and padding
-                    Text("Disclaimer: Road One and its developers are not responsible for any fines, tickets, or other consequences that may arise from using this app. Information may be inaccurate or outdated; always verify with official sources.")
+                    Text("Disclaimer: Chicago Street Cleaning Helper and its developers are not responsible for any fines, tickets, or other consequences that may arise from using this app. Information may be inaccurate or outdated; always verify with official sources.")
                         .font(.custom("Quicksand-Regular", size: 10))
                         .foregroundColor(Color.white.opacity(0.7))
                         .multilineTextAlignment(.center)

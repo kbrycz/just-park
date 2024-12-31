@@ -59,7 +59,7 @@ If you find that too many wards are displayed and you only care about a few, you
                     .padding(.horizontal)
 
                     // Disclaimer below the card
-                    Text("Disclaimer: Road One and its developers are not responsible for any fines, tickets, or other consequences that may arise from using this app. Information may be inaccurate or outdated; always verify with official sources.")
+                    Text("Disclaimer: Chicago Street Cleaning Helper and its developers are not responsible for any fines, tickets, or other consequences that may arise from using this app. Information may be inaccurate or outdated; always verify with official sources.")
                         .font(.custom("Quicksand-Regular", size: 10))
                         .foregroundColor(Color.white.opacity(0.7))
                         .multilineTextAlignment(.center)
